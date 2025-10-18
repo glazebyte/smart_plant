@@ -7,24 +7,20 @@ class SensorData {
   @JsonKey(name: 't')
   final int timestamp;
   
-  @JsonKey(name: 'soil')
+  @JsonKey(name: 's')
   final double soilMoisture;
   
-  @JsonKey(name: 'hum')
+  @JsonKey(name: 'h')
   final double humidity;
   
-  @JsonKey(name: 'temp')
+  @JsonKey(name: 'tmp')
   final double temperature;
   
-  @JsonKey(name: 'bat')
-  final double batteryVoltage;
-
   const SensorData({
     required this.timestamp,
     required this.soilMoisture,
     required this.humidity,
     required this.temperature,
-    required this.batteryVoltage,
   });
 
   factory SensorData.fromJson(Map<String, dynamic> json) => _$SensorDataFromJson(json);
@@ -36,7 +32,6 @@ class SensorData {
   String get soilMoisturePercentage => '${soilMoisture.toStringAsFixed(1)}%';
   String get humidityPercentage => '${humidity.toStringAsFixed(1)}%';
   String get temperatureCelsius => '${temperature.toStringAsFixed(1)}°C';
-  String get batteryVoltageString => '${batteryVoltage.toStringAsFixed(2)}V';
   
   // Status helpers
   SoilMoistureLevel get soilMoistureLevel {
@@ -45,25 +40,13 @@ class SensorData {
     return SoilMoistureLevel.high;
   }
   
-  BatteryLevel get batteryLevel {
-    if (batteryVoltage < 3.3) return BatteryLevel.low;
-    if (batteryVoltage < 3.7) return BatteryLevel.medium;
-    return BatteryLevel.high;
-  }
-
   @override
   String toString() {
-    return 'SensorData(timestamp: $timestamp, soil: $soilMoisture%, humidity: $humidity%, temp: $temperature°C, battery: ${batteryVoltage}V)';
+    return 'SensorData(timestamp: $timestamp, soil: $soilMoisture%, humidity: $humidity%, temp: $temperature°C)';
   }
 }
 
 enum SoilMoistureLevel {
-  low,
-  medium,
-  high,
-}
-
-enum BatteryLevel {
   low,
   medium,
   high,

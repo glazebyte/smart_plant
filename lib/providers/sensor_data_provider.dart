@@ -28,14 +28,11 @@ class SensorDataProvider extends ChangeNotifier {
   double? get soilMoisturePercentage => _latestSensorData?.soilMoisture;
   double? get humidityPercentage => _latestSensorData?.humidity;
   double? get temperatureCelsius => _latestSensorData?.temperature;
-  double? get batteryVoltage => _latestSensorData?.batteryVoltage;
 
   SoilMoistureLevel? get soilMoistureLevel => _latestSensorData?.soilMoistureLevel;
-  BatteryLevel? get batteryLevel => _latestSensorData?.batteryLevel;
 
   // Status indicators
   bool get needsWatering => soilMoistureLevel == SoilMoistureLevel.low;
-  bool get lowBattery => batteryLevel == BatteryLevel.low;
 
   SensorDataProvider() {
     _loadStoredData();
@@ -168,7 +165,6 @@ class SensorDataProvider extends ChangeNotifier {
         'soilMoisture': null,
         'humidity': null,
         'temperature': null,
-        'batteryVoltage': null,
       };
     }
 
@@ -176,7 +172,6 @@ class SensorDataProvider extends ChangeNotifier {
       'soilMoisture': data.map((d) => d.soilMoisture).reduce((a, b) => a + b) / data.length,
       'humidity': data.map((d) => d.humidity).reduce((a, b) => a + b) / data.length,
       'temperature': data.map((d) => d.temperature).reduce((a, b) => a + b) / data.length,
-      'batteryVoltage': data.map((d) => d.batteryVoltage).reduce((a, b) => a + b) / data.length,
     };
   }
 
@@ -188,14 +183,12 @@ class SensorDataProvider extends ChangeNotifier {
         'soilMoisture': {'min': null, 'max': null},
         'humidity': {'min': null, 'max': null},
         'temperature': {'min': null, 'max': null},
-        'batteryVoltage': {'min': null, 'max': null},
       };
     }
 
     final soilValues = data.map((d) => d.soilMoisture).toList();
     final humidityValues = data.map((d) => d.humidity).toList();
     final tempValues = data.map((d) => d.temperature).toList();
-    final batteryValues = data.map((d) => d.batteryVoltage).toList();
 
     return {
       'soilMoisture': {
@@ -209,10 +202,6 @@ class SensorDataProvider extends ChangeNotifier {
       'temperature': {
         'min': tempValues.reduce((a, b) => a < b ? a : b),
         'max': tempValues.reduce((a, b) => a > b ? a : b),
-      },
-      'batteryVoltage': {
-        'min': batteryValues.reduce((a, b) => a < b ? a : b),
-        'max': batteryValues.reduce((a, b) => a > b ? a : b),
       },
     };
   }

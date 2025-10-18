@@ -7,7 +7,6 @@ A modern Flutter Android application for monitoring and controlling your smart p
 ### 📊 Real-time Monitoring
 - **Soil Moisture**: Track soil moisture levels with visual indicators
 - **Temperature & Humidity**: Monitor environmental conditions
-- **Battery Status**: Keep track of device battery level
 - **Live Dashboard**: Real-time sensor data with color-coded status indicators
 
 ### 💧 Smart Watering Control
@@ -49,7 +48,7 @@ The app communicates with your ESP32 device using these BLE characteristics:
 #### 1. Sensor Data (Notify/Read)
 **UUID:** `0000a001-0000-1000-8000-00805f9b34fb`
 ```json
-{"t": <timestamp>, "soil": <percentage>, "hum": <RH>, "temp": <celsius>, "bat": <volts>}
+{"t": <timestamp>, "soil": <percentage>, "hum": <RH>, "temp": <celsius>}
 ```
 
 #### 2. Control (Write)
@@ -150,7 +149,7 @@ Your ESP32 device should implement:
 - 12V solenoid valve with relay
 - DS3231 RTC module
 - Water pump and tubing
-- Power supply (battery + solar panel recommended)
+- Power supply (mains adapter or external power source)
 
 ## Usage
 

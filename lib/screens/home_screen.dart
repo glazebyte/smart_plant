@@ -175,16 +175,6 @@ class DashboardTab extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Expanded(
-                          child: StatusIndicator(
-                            icon: MdiIcons.battery,
-                            label: 'Battery',
-                            value: sensorProvider.lowBattery ? 'Low' : 'Good',
-                            color: sensorProvider.lowBattery 
-                              ? Colors.red 
-                              : Colors.green,
-                          ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -221,26 +211,11 @@ class DashboardTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     
-                    Row(
-                      children: [
-                        Expanded(
-                          child: SensorCard(
-                            icon: MdiIcons.thermometer,
-                            label: 'Temperature',
-                            value: sensorProvider.latestSensorData!.temperatureCelsius,
-                            color: Colors.orange,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: SensorCard(
-                            icon: MdiIcons.battery,
-                            label: 'Battery',
-                            value: sensorProvider.latestSensorData!.batteryVoltageString,
-                            color: _getBatteryColor(sensorProvider.batteryLevel!),
-                          ),
-                        ),
-                      ],
+                    SensorCard(
+                      icon: MdiIcons.thermometer,
+                      label: 'Temperature',
+                      value: sensorProvider.latestSensorData!.temperatureCelsius,
+                      color: Colors.orange,
                     ),
                     const SizedBox(height: 16),
                   ] else ...[
@@ -329,16 +304,6 @@ class DashboardTab extends StatelessWidget {
     }
   }
 
-  Color _getBatteryColor(BatteryLevel level) {
-    switch (level) {
-      case BatteryLevel.low:
-        return Colors.red;
-      case BatteryLevel.medium:
-        return Colors.orange;
-      case BatteryLevel.high:
-        return Colors.green;
-    }
-  }
 
   String _formatDateTime(DateTime dateTime) {
     final now = DateTime.now();

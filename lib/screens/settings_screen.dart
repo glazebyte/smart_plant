@@ -183,14 +183,6 @@ class SettingsScreen extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         const SizedBox(height: 12),
-                        _buildStatusRow(
-                          context,
-                          icon: MdiIcons.battery,
-                          label: 'Battery',
-                          value: sensorProvider.latestSensorData!.batteryVoltageString,
-                          color: _getBatteryColor(sensorProvider.batteryLevel!),
-                        ),
-                        const SizedBox(height: 12),
                         const Divider(),
                         Row(
                           children: [
@@ -257,16 +249,6 @@ class SettingsScreen extends StatelessWidget {
     }
   }
 
-  Color _getBatteryColor(BatteryLevel level) {
-    switch (level) {
-      case BatteryLevel.low:
-        return Colors.red;
-      case BatteryLevel.medium:
-        return Colors.orange;
-      case BatteryLevel.high:
-        return Colors.green;
-    }
-  }
 
   String _formatLastUpdate(DateTime dateTime) {
     final now = DateTime.now();

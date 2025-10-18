@@ -6,7 +6,6 @@ import 'package:fl_chart/fl_chart.dart';
 import '../providers/ble_provider.dart';
 import '../providers/sensor_data_provider.dart';
 import '../models/log_entry.dart';
-import '../models/sensor_data.dart';
 
 class LogsScreen extends StatefulWidget {
   const LogsScreen({super.key});
@@ -124,14 +123,6 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
               ),
               const SizedBox(height: 16),
 
-              // Battery Chart
-              _buildChartCard(
-                title: 'Battery Voltage',
-                icon: MdiIcons.battery,
-                color: Colors.green,
-                data: _getBatteryData(sensorProvider),
-                unit: 'V',
-              ),
             ],
           ),
         );
@@ -418,13 +409,6 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                         value: log.temperatureCelsius,
                         color: Colors.orange,
                       ),
-                    if (log.batteryVoltage != null)
-                      _buildLogDetailRow(
-                        icon: MdiIcons.battery,
-                        label: 'Battery',
-                        value: log.batteryVoltageString,
-                        color: Colors.green,
-                      ),
                   ],
                 ),
               ),
@@ -486,12 +470,6 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
     }).toList();
   }
 
-  List<FlSpot> _getBatteryData(SensorDataProvider provider) {
-    final data = provider.getDataForLastHours(24);
-    return data.asMap().entries.map((entry) {
-      return FlSpot(entry.key.toDouble(), entry.value.batteryVoltage);
-    }).toList();
-  }
 
   String _formatChartTime(int index) {
     // Simple time formatting for chart

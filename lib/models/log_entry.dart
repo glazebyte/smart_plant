@@ -4,27 +4,23 @@ part 'log_entry.g.dart';
 
 @JsonSerializable()
 class LogEntry {
-  @JsonKey(name: 'ts')
+  @JsonKey(name: 't')
   final int timestamp;
   
-  @JsonKey(name: 'soil')
+  @JsonKey(name: 's')
   final double? soilMoisture;
   
-  @JsonKey(name: 'hum')
+  @JsonKey(name: 'h')
   final double? humidity;
   
-  @JsonKey(name: 'temp')
+  @JsonKey(name: 'tmp')
   final double? temperature;
   
-  @JsonKey(name: 'bat')
-  final double? batteryVoltage;
-
   const LogEntry({
     required this.timestamp,
     this.soilMoisture,
     this.humidity,
     this.temperature,
-    this.batteryVoltage,
   });
 
   factory LogEntry.fromJson(Map<String, dynamic> json) => _$LogEntryFromJson(json);
@@ -41,11 +37,10 @@ class LogEntry {
   String get soilMoisturePercentage => soilMoisture != null ? '${soilMoisture!.toStringAsFixed(1)}%' : 'N/A';
   String get humidityPercentage => humidity != null ? '${humidity!.toStringAsFixed(1)}%' : 'N/A';
   String get temperatureCelsius => temperature != null ? '${temperature!.toStringAsFixed(1)}°C' : 'N/A';
-  String get batteryVoltageString => batteryVoltage != null ? '${batteryVoltage!.toStringAsFixed(2)}V' : 'N/A';
 
   @override
   String toString() {
-    return 'LogEntry(timestamp: $timestamp, soil: $soilMoisture%, humidity: $humidity%, temp: $temperature°C, battery: ${batteryVoltage}V)';
+    return 'LogEntry(timestamp: $timestamp, soil: $soilMoisture%, humidity: $humidity%, temp: $temperature°C)';
   }
 }
 

@@ -8,17 +8,15 @@ part of 'sensor_data.dart';
 
 SensorData _$SensorDataFromJson(Map<String, dynamic> json) => SensorData(
   timestamp: (json['t'] as num).toInt(),
-  soilMoisture: (json['soil'] as num).toDouble(),
-  humidity: (json['hum'] as num).toDouble(),
-  temperature: (json['temp'] as num).toDouble(),
-  batteryVoltage: (json['bat'] as num).toDouble(),
+  soilMoisture: (json['s'] as num).toDouble(),
+  humidity: (json['h'] as num).toDouble(),
+  temperature: (json['tmp'] as num).toDouble(),
 );
 
 Map<String, dynamic> _$SensorDataToJson(SensorData instance) =>
     <String, dynamic>{
       't': instance.timestamp,
-      'soil': instance.soilMoisture,
-      'hum': instance.humidity,
-      'temp': instance.temperature,
-      'bat': instance.batteryVoltage,
+      's': instance.soilMoisture,
+      'h': instance.humidity,
+      'tmp': instance.temperature,
     };

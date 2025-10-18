@@ -117,16 +117,6 @@ class _ControlScreenState extends State<ControlScreen> {
                                   status: 'Normal',
                                 ),
                               ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildStatusItem(
-                                  icon: MdiIcons.battery,
-                                  label: 'Battery',
-                                  value: sensorProvider.latestSensorData!.batteryVoltageString,
-                                  color: _getBatteryColor(sensorProvider.batteryLevel!),
-                                  status: _getBatteryStatus(sensorProvider.batteryLevel!),
-                                ),
-                              ),
                             ],
                           ),
                         ],
@@ -395,27 +385,6 @@ class _ControlScreenState extends State<ControlScreen> {
     }
   }
 
-  Color _getBatteryColor(BatteryLevel level) {
-    switch (level) {
-      case BatteryLevel.low:
-        return Colors.red;
-      case BatteryLevel.medium:
-        return Colors.orange;
-      case BatteryLevel.high:
-        return Colors.green;
-    }
-  }
-
-  String _getBatteryStatus(BatteryLevel level) {
-    switch (level) {
-      case BatteryLevel.low:
-        return 'Low';
-      case BatteryLevel.medium:
-        return 'Medium';
-      case BatteryLevel.high:
-        return 'Good';
-    }
-  }
 
   String _getTemperatureStatus(double temperature) {
     if (temperature < 15) return 'Cold';

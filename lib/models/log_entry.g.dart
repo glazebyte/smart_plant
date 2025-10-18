@@ -7,11 +7,10 @@ part of 'log_entry.dart';
 // **************************************************************************
 
 LogEntry _$LogEntryFromJson(Map<String, dynamic> json) => LogEntry(
-  timestamp: (json['ts'] as num).toInt(),
-  soilMoisture: (json['soil'] as num?)?.toDouble(),
-  humidity: (json['hum'] as num?)?.toDouble(),
-  temperature: (json['temp'] as num?)?.toDouble(),
-  batteryVoltage: (json['bat'] as num?)?.toDouble(),
+  timestamp: (json['t'] as num).toInt(),
+  soilMoisture: (json['s'] as num?)?.toDouble(),
+  humidity: (json['h'] as num?)?.toDouble(),
+  temperature: (json['tmp'] as num?)?.toDouble(),
 );
 
 Map<String, dynamic> _$LogEntryToJson(LogEntry instance) => <String, dynamic>{
@@ -19,7 +18,6 @@ Map<String, dynamic> _$LogEntryToJson(LogEntry instance) => <String, dynamic>{
   'soil': instance.soilMoisture,
   'hum': instance.humidity,
   'temp': instance.temperature,
-  'bat': instance.batteryVoltage,
 };
 
 LogRequest _$LogRequestFromJson(Map<String, dynamic> json) => LogRequest(
