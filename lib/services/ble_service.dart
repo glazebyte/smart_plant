@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../models/sensor_data.dart';
@@ -10,12 +11,12 @@ class BleService {
   static const String deviceName = 'SmartPlant';
   
   // Service and Characteristic UUIDs
-  static const String serviceUuid = '0000a000-0000-1000-8000-00805f9b34fb';
-  static const String sensorDataUuid = '0000a001-0000-1000-8000-00805f9b34fb';
-  static const String controlUuid = '0000a002-0000-1000-8000-00805f9b34fb';
-  static const String scheduleUuid = '0000a003-0000-1000-8000-00805f9b34fb';
-  static const String logsUuid = '0000a004-0000-1000-8000-00805f9b34fb';
-  static const String rtcUuid = '0000a005-0000-1000-8000-00805f9b34fb';
+  static const String serviceUuid = 'a000';
+  static const String sensorDataUuid = 'a001';
+  static const String controlUuid = 'a002';
+  static const String scheduleUuid = 'a003';
+  static const String logsUuid = 'a004';
+  static const String rtcUuid = 'a005';
 
   BluetoothDevice? _device;
   BluetoothCharacteristic? _sensorDataCharacteristic;
@@ -66,6 +67,7 @@ class BleService {
       // Listen to scan results
       final subscription = FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult result in results) {
+          log( 'Found device: ${result.device.name}, RSSI: ${result.rssi}', name: 'BleService');
           if (result.device.platformName.isNotEmpty && 
               (result.device.platformName.toLowerCase().contains('smartplant') ||
                result.device.platformName.toLowerCase().contains('plant'))) {
@@ -97,6 +99,8 @@ class BleService {
 
       // Connect to device
       await device.connect(timeout: const Duration(seconds: 15));
+
+      await device.requestMtu(512);
       
       // Discover services
       List<BluetoothService> services = await device.discoverServices();
@@ -104,6 +108,7 @@ class BleService {
       // Find our service
       BluetoothService? smartPlantService;
       for (BluetoothService service in services) {
+        log("found service ${service.uuid.toString().toLowerCase()}");
         if (service.uuid.toString().toLowerCase() == serviceUuid.toLowerCase()) {
           smartPlantService = service;
           break;
