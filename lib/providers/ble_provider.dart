@@ -118,9 +118,12 @@ class BleProvider extends ChangeNotifier {
   Future<List<WaterSchedule>> loadSchedules() async {
     try {
       _clearError();
-      return await _bleService.readSchedules();
+      final schedules = await _bleService.readSchedules();
+      debugPrint('BleProvider: Loaded ${schedules.length} schedules: $schedules');
+      return schedules;
     } catch (e) {
       _setError('Failed to load schedules: $e');
+      debugPrint('BleProvider: Error loading schedules: $e');
       return [];
     }
   }

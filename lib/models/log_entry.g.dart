@@ -14,10 +14,10 @@ LogEntry _$LogEntryFromJson(Map<String, dynamic> json) => LogEntry(
 );
 
 Map<String, dynamic> _$LogEntryToJson(LogEntry instance) => <String, dynamic>{
-  'ts': instance.timestamp,
-  'soil': instance.soilMoisture,
-  'hum': instance.humidity,
-  'temp': instance.temperature,
+  't': instance.timestamp,
+  's': instance.soilMoisture,
+  'h': instance.humidity,
+  'tmp': instance.temperature,
 };
 
 LogRequest _$LogRequestFromJson(Map<String, dynamic> json) => LogRequest(

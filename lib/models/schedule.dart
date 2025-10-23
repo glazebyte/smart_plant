@@ -7,7 +7,7 @@ class WaterSchedule {
   final int slot;
   final String time; // Format: "HH:MM"
   final int duration; // Duration in seconds
-  final int enabled; // 1 for enabled, 0 for disabled
+  final bool enabled; // 1 for enabled, 0 for disabled
 
   const WaterSchedule({
     required this.slot,
@@ -20,7 +20,7 @@ class WaterSchedule {
   Map<String, dynamic> toJson() => _$WaterScheduleToJson(this);
 
   // Helper methods
-  bool get isEnabled => enabled == 1;
+  bool get isEnabled => enabled == true;
   
   String get durationText {
     if (duration < 60) return '${duration}s';
@@ -55,7 +55,7 @@ class WaterSchedule {
     int? slot,
     String? time,
     int? duration,
-    int? enabled,
+    bool? enabled,
   }) {
     return WaterSchedule(
       slot: slot ?? this.slot,

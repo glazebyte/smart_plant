@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../providers/ble_provider.dart';
 import '../models/schedule.dart';
+import 'dart:developer';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
@@ -23,7 +24,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   Future<void> _loadSchedules() async {
     if (!mounted) return;
-    
+
     final bleProvider = Provider.of<BleProvider>(context, listen: false);
     if (!bleProvider.isConnected) return;
 
@@ -33,11 +34,19 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
     try {
       final schedules = await bleProvider.loadSchedules();
+      log(
+        'ScheduleScreen: Loaded ${schedules.length} schedules: $schedules',
+        name: 'ScheduleScreen',
+      );
       if (mounted) {
         setState(() {
           _schedules = schedules;
           _isLoading = false;
         });
+        log(
+          'ScheduleScreen: Updated state with ${_schedules.length} schedules',
+          name: 'ScheduleScreen',
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -60,10 +69,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       appBar: AppBar(
         title: const Text('Watering Schedule'),
         actions: [
-          IconButton(
-            onPressed: _loadSchedules,
-            icon: Icon(MdiIcons.refresh),
-          ),
+          IconButton(onPressed: _loadSchedules, icon: Icon(MdiIcons.refresh)),
         ],
       ),
       body: Consumer<BleProvider>(
@@ -91,17 +97,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           children: [
                             Text(
                               'Device Not Connected',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: Colors.orange[800],
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    color: Colors.orange[800],
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Connect to your device to manage watering schedules',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.orange[700],
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: Colors.orange[700]),
                             ),
                           ],
                         ),
@@ -115,8 +121,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 child: _isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : _schedules.isEmpty
-                        ? _buildEmptyState()
-                        : _buildSchedulesList(),
+                    ? _buildEmptyState()
+                    : _buildSchedulesList(),
               ),
             ],
           );
@@ -138,17 +144,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            MdiIcons.calendarClock,
-            size: 64,
-            color: Colors.grey,
-          ),
+          Icon(MdiIcons.calendarClock, size: 64, color: Colors.grey),
           const SizedBox(height: 16),
           Text(
             'No Schedules Yet',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Colors.grey,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(color: Colors.grey),
           ),
           const SizedBox(height: 8),
           const Text(
@@ -181,7 +183,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           margin: const EdgeInsets.only(bottom: 12),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: schedule.isEnabled 
+              backgroundColor: schedule.isEnabled
                   ? Colors.green.withOpacity(0.2)
                   : Colors.grey.withOpacity(0.2),
               child: Icon(
@@ -202,23 +204,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(MdiIcons.clockOutline, size: 16, color: Colors.grey[600]),
+                    Icon(
+                      MdiIcons.clockOutline,
+                      size: 16,
+                      color: Colors.grey[600],
+                    ),
                     const SizedBox(width: 4),
                     Text('${schedule.time} • ${schedule.durationText}'),
                   ],
                 ),
-                if (schedule.isEnabled && schedule.nextScheduledTime != null) ...[
+                if (schedule.isEnabled &&
+                    schedule.nextScheduledTime != null) ...[
                   const SizedBox(height: 2),
                   Row(
                     children: [
-                      Icon(MdiIcons.calendarClock, size: 16, color: Colors.grey[600]),
+                      Icon(
+                        MdiIcons.calendarClock,
+                        size: 16,
+                        color: Colors.grey[600],
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         'Next: ${_formatNextSchedule(schedule.nextScheduledTime!)}',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
                       ),
                     ],
                   ),
@@ -277,7 +285,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   String _formatNextSchedule(DateTime nextTime) {
     final now = DateTime.now();
     final difference = nextTime.difference(now);
-    
+
     if (difference.inHours < 24) {
       if (difference.inHours < 1) {
         return 'in ${difference.inMinutes}m';
@@ -311,11 +319,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   Future<void> _saveSchedule(WaterSchedule schedule) async {
     final bleProvider = Provider.of<BleProvider>(context, listen: false);
-    
+
     try {
       await bleProvider.saveSchedule(schedule);
       await _loadSchedules(); // Reload to get updated list
-      
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -337,7 +345,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   void _toggleSchedule(WaterSchedule schedule, bool enabled) async {
-    final updatedSchedule = schedule.copyWith(enabled: enabled ? 1 : 0);
+    final updatedSchedule = schedule.copyWith(enabled: enabled ? true : false);
     await _saveSchedule(updatedSchedule);
   }
 
@@ -346,7 +354,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Delete Schedule'),
-        content: Text('Are you sure you want to delete Schedule ${schedule.slot}?'),
+        content: Text(
+          'Are you sure you want to delete Schedule ${schedule.slot}?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -356,7 +366,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             onPressed: () async {
               Navigator.pop(context);
               // Delete by setting enabled to 0 and duration to 0
-              final deletedSchedule = schedule.copyWith(enabled: 0, duration: 0);
+              final deletedSchedule = schedule.copyWith(
+                enabled: false,
+                duration: 0,
+              );
               await _saveSchedule(deletedSchedule);
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
@@ -372,11 +385,7 @@ class ScheduleDialog extends StatefulWidget {
   final WaterSchedule? schedule;
   final Function(WaterSchedule) onSave;
 
-  const ScheduleDialog({
-    super.key,
-    this.schedule,
-    required this.onSave,
-  });
+  const ScheduleDialog({super.key, this.schedule, required this.onSave});
 
   @override
   State<ScheduleDialog> createState() => _ScheduleDialogState();
@@ -391,17 +400,22 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
   @override
   void initState() {
     super.initState();
-    
+
     if (widget.schedule != null) {
       _timeController = TextEditingController(text: widget.schedule!.time);
-      _duration = widget.schedule!.duration;
       _enabled = widget.schedule!.isEnabled;
       _slot = widget.schedule!.slot;
+      if (widget.schedule!.duration >= 5) {
+        _duration = widget.schedule!.duration;
+      } else {
+        _duration = 30; // Default duration
+      }
     } else {
       _timeController = TextEditingController(text: '07:00');
       _duration = 30;
       _enabled = true;
-      _slot = DateTime.now().millisecondsSinceEpoch % 100; // Simple slot generation
+      _slot =
+          DateTime.now().millisecondsSinceEpoch % 100; // Simple slot generation
     }
   }
 
@@ -430,7 +444,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
             onTap: _selectTime,
           ),
           const SizedBox(height: 16),
-          
+
           // Duration slider
           Text(
             'Duration: ${_formatDuration(_duration)}',
@@ -447,9 +461,9 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
               });
             },
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Enabled switch
           SwitchListTile(
             title: const Text('Enable Schedule'),
@@ -467,10 +481,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
           onPressed: () => Navigator.pop(context),
           child: const Text('Cancel'),
         ),
-        ElevatedButton(
-          onPressed: _saveSchedule,
-          child: const Text('Save'),
-        ),
+        ElevatedButton(onPressed: _saveSchedule, child: const Text('Save')),
       ],
     );
   }
@@ -481,11 +492,11 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
       context: context,
       initialTime: currentTime,
     );
-    
+
     if (selectedTime != null) {
       setState(() {
-        _timeController.text = 
-          '${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}';
+        _timeController.text =
+            '${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}';
       });
     }
   }
@@ -509,9 +520,9 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
       slot: _slot,
       time: _timeController.text,
       duration: _duration,
-      enabled: _enabled ? 1 : 0,
+      enabled: _enabled ? true : false,
     );
-    
+
     widget.onSave(schedule);
     Navigator.pop(context);
   }

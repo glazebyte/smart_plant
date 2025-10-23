@@ -11,7 +11,7 @@ WaterSchedule _$WaterScheduleFromJson(Map<String, dynamic> json) =>
       slot: (json['slot'] as num).toInt(),
       time: json['time'] as String,
       duration: (json['duration'] as num).toInt(),
-      enabled: (json['enabled'] as num).toInt(),
+      enabled: json['enabled'] as bool,
     );
 
 Map<String, dynamic> _$WaterScheduleToJson(WaterSchedule instance) =>
