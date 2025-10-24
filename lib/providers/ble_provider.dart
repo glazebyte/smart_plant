@@ -92,7 +92,7 @@ class BleProvider extends ChangeNotifier {
       final command = ControlCommand.trigger(durationSeconds);
       await _bleService.sendControlCommand(command);
     } catch (e) {
-      _setError('Failed to trigger watering: $e');
+      _handleBleError('Failed to trigger watering: $e', e);
     }
   }
 
@@ -102,7 +102,7 @@ class BleProvider extends ChangeNotifier {
       final command = ControlCommand.cancel();
       await _bleService.sendControlCommand(command);
     } catch (e) {
-      _setError('Failed to cancel watering: $e');
+      _handleBleError('Failed to cancel watering: $e', e);
     }
   }
 
@@ -111,7 +111,7 @@ class BleProvider extends ChangeNotifier {
       _clearError();
       await _bleService.writeSchedule(schedule);
     } catch (e) {
-      _setError('Failed to save schedule: $e');
+      _handleBleError('Failed to save schedule: $e', e);
     }
   }
 
@@ -122,7 +122,7 @@ class BleProvider extends ChangeNotifier {
       debugPrint('BleProvider: Loaded ${schedules.length} schedules: $schedules');
       return schedules;
     } catch (e) {
-      _setError('Failed to load schedules: $e');
+      _handleBleError('Failed to load schedules: $e', e);
       debugPrint('BleProvider: Error loading schedules: $e');
       return [];
     }
@@ -133,7 +133,7 @@ class BleProvider extends ChangeNotifier {
       _clearError();
       await _bleService.requestLogs(start: start, count: count);
     } catch (e) {
-      _setError('Failed to request logs: $e');
+      _handleBleError('Failed to request logs: $e', e);
     }
   }
 
@@ -142,7 +142,7 @@ class BleProvider extends ChangeNotifier {
       _clearError();
       await _bleService.syncRTC();
     } catch (e) {
-      _setError('Failed to sync RTC: $e');
+      _handleBleError('Failed to sync RTC: $e', e);
     }
   }
 
@@ -151,9 +151,23 @@ class BleProvider extends ChangeNotifier {
       _clearError();
       return await _bleService.readRTC();
     } catch (e) {
-      _setError('Failed to read RTC: $e');
+      _handleBleError('Failed to read RTC: $e', e);
       return null;
     }
+  }
+
+  void _handleBleError(String errorMessage, dynamic error) {
+    // Check if the error indicates a disconnection
+    final errorString = error.toString().toLowerCase();
+    if (errorString.contains('disconnected') ||
+        errorString.contains('gatt') ||
+        errorString.contains('not connected') ||
+        errorString.contains('characteristic not available')) {
+      debugPrint('BleProvider: Detected disconnection error, updating state');
+      _connectionState = BleConnectionState.disconnected;
+      _connectedDevice = null;
+    }
+    _setError(errorMessage);
   }
 
   void _setError(String error) {

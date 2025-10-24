@@ -28,6 +28,8 @@ class BleService {
   final StreamController<SensorData> _sensorDataController = StreamController<SensorData>.broadcast();
   final StreamController<String> _logDataController = StreamController<String>.broadcast();
   final StreamController<BleConnectionState> _connectionStateController = StreamController<BleConnectionState>.broadcast();
+  
+  StreamSubscription<BluetoothConnectionState>? _deviceConnectionSubscription;
 
   Stream<SensorData> get sensorDataStream => _sensorDataController.stream;
   Stream<String> get logDataStream => _logDataController.stream;
@@ -100,6 +102,9 @@ class BleService {
       // Connect to device
       await device.connect(timeout: const Duration(seconds: 15));
 
+      // Monitor device connection state
+      _startConnectionStateMonitoring();
+
       await device.requestMtu(512);
       
       // Discover services
@@ -164,6 +169,9 @@ class BleService {
 
   Future<void> disconnect() async {
     try {
+      // Cancel connection state monitoring
+      _stopConnectionStateMonitoring();
+      
       if (_device != null) {
         await _device!.disconnect();
       }
@@ -182,8 +190,10 @@ class BleService {
   }
 
   Future<void> sendControlCommand(ControlCommand command) async {
-    if (_controlCharacteristic == null || !isConnected) {
-      throw Exception('Not connected to device or control characteristic not available');
+    await _validateConnection();
+    
+    if (_controlCharacteristic == null) {
+      throw Exception('Control characteristic not available');
     }
 
     try {
@@ -192,13 +202,17 @@ class BleService {
       await _controlCharacteristic!.write(bytes);
     } catch (e) {
       debugPrint('Error sending control command: $e');
+      // Check if device is still connected
+      await _checkDeviceConnection();
       rethrow;
     }
   }
 
   Future<void> writeSchedule(WaterSchedule schedule) async {
-    if (_scheduleCharacteristic == null || !isConnected) {
-      throw Exception('Not connected to device or schedule characteristic not available');
+    await _validateConnection();
+    
+    if (_scheduleCharacteristic == null) {
+      throw Exception('Schedule characteristic not available');
     }
 
     try {
@@ -207,13 +221,16 @@ class BleService {
       await _scheduleCharacteristic!.write(bytes);
     } catch (e) {
       debugPrint('Error writing schedule: $e');
+      await _checkDeviceConnection();
       rethrow;
     }
   }
 
   Future<List<WaterSchedule>> readSchedules() async {
-    if (_scheduleCharacteristic == null || !isConnected) {
-      throw Exception('Not connected to device or schedule characteristic not available');
+    await _validateConnection();
+    
+    if (_scheduleCharacteristic == null) {
+      throw Exception('Schedule characteristic not available');
     }
 
     try {
@@ -228,13 +245,16 @@ class BleService {
       }
     } catch (e) {
       debugPrint('Error reading schedules: $e');
+      await _checkDeviceConnection();
       rethrow;
     }
   }
 
   Future<void> requestLogs({int start = 0, int? count}) async {
-    if (_logsCharacteristic == null || !isConnected) {
-      throw Exception('Not connected to device or logs characteristic not available');
+    await _validateConnection();
+    
+    if (_logsCharacteristic == null) {
+      throw Exception('Logs characteristic not available');
     }
 
     try {
@@ -244,6 +264,7 @@ class BleService {
       await _logsCharacteristic!.write(bytes);
     } catch (e) {
       debugPrint('Error requesting logs: $e');
+      await _checkDeviceConnection();
       rethrow;
     }
   }
@@ -307,12 +328,101 @@ class BleService {
     }
   }
 
+  void _startConnectionStateMonitoring() {
+    if (_device == null) return;
+    
+    _deviceConnectionSubscription = _device!.connectionState.listen(
+      (BluetoothConnectionState state) {
+        debugPrint('Device connection state changed: $state');
+        switch (state) {
+          case BluetoothConnectionState.connected:
+            if (_connectionState != BleConnectionState.connected) {
+              _updateConnectionState(BleConnectionState.connected);
+            }
+            break;
+          case BluetoothConnectionState.disconnected:
+            debugPrint('Device unexpectedly disconnected');
+            _handleUnexpectedDisconnection();
+            break;
+          case BluetoothConnectionState.connecting:
+            if (_connectionState != BleConnectionState.connecting) {
+              _updateConnectionState(BleConnectionState.connecting);
+            }
+            break;
+          case BluetoothConnectionState.disconnecting:
+            // Keep current state during intentional disconnection
+            break;
+        }
+      },
+      onError: (error) {
+        debugPrint('Connection state monitoring error: $error');
+        _handleUnexpectedDisconnection();
+      },
+    );
+  }
+
+  void _stopConnectionStateMonitoring() {
+    _deviceConnectionSubscription?.cancel();
+    _deviceConnectionSubscription = null;
+  }
+
+  void _handleUnexpectedDisconnection() {
+    debugPrint('Handling unexpected disconnection');
+    
+    // Clean up characteristics
+    _sensorDataCharacteristic = null;
+    _controlCharacteristic = null;
+    _scheduleCharacteristic = null;
+    _logsCharacteristic = null;
+    _rtcCharacteristic = null;
+    
+    // Update connection state
+    _updateConnectionState(BleConnectionState.disconnected);
+    
+    // Stop monitoring since device is disconnected
+    _stopConnectionStateMonitoring();
+  }
+
   void _updateConnectionState(BleConnectionState state) {
-    _connectionState = state;
-    _connectionStateController.add(state);
+    if (_connectionState != state) {
+      _connectionState = state;
+      _connectionStateController.add(state);
+      debugPrint('BLE connection state updated to: $state');
+    }
+  }
+
+  Future<void> _validateConnection() async {
+    if (!isConnected || _device == null) {
+      throw Exception('Not connected to device');
+    }
+    
+    // Double-check the actual device connection state
+    await _checkDeviceConnection();
+  }
+
+  Future<void> _checkDeviceConnection() async {
+    if (_device == null) return;
+    
+    try {
+      final state = await _device!.connectionState.first.timeout(
+        const Duration(seconds: 2),
+        onTimeout: () => BluetoothConnectionState.disconnected,
+      );
+      
+      if (state != BluetoothConnectionState.connected && _connectionState == BleConnectionState.connected) {
+        debugPrint('Device connection mismatch detected, updating state');
+        _handleUnexpectedDisconnection();
+      }
+    } catch (e) {
+      debugPrint('Error checking device connection: $e');
+      if (_connectionState == BleConnectionState.connected) {
+        _handleUnexpectedDisconnection();
+      }
+    }
   }
 
   void dispose() {
+    _stopConnectionStateMonitoring();
     _sensorDataController.close();
     _logDataController.close();
     _connectionStateController.close();
