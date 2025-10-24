@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../providers/ble_provider.dart';
 import '../services/ble_service.dart';
+import '../l10n/app_localizations.dart';
 
 class ConnectionStatusCard extends StatelessWidget {
   const ConnectionStatusCard({super.key});
@@ -24,14 +25,14 @@ class ConnectionStatusCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        _getStatusTitle(bleProvider.connectionState),
+                        _getStatusTitle(context, bleProvider.connectionState),
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        _getStatusDescription(bleProvider),
+                        _getStatusDescription(context, bleProvider),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -77,13 +78,13 @@ class ConnectionStatusCard extends StatelessWidget {
                   ElevatedButton.icon(
                     onPressed: bleProvider.scanForDevices,
                     icon: Icon(MdiIcons.magnify),
-                    label: const Text('Scan'),
+                    label: Text(AppLocalizations.of(context)!.scan),
                   ),
                 if (bleProvider.connectionState == BleConnectionState.connected)
                   TextButton.icon(
                     onPressed: bleProvider.disconnect,
                     icon: Icon(MdiIcons.bluetoothOff),
-                    label: const Text('Disconnect'),
+                    label: Text(AppLocalizations.of(context)!.disconnect),
                   ),
               ],
             ),
@@ -138,33 +139,33 @@ class ConnectionStatusCard extends StatelessWidget {
     return icon;
   }
 
-  String _getStatusTitle(BleConnectionState state) {
+  String _getStatusTitle(BuildContext context, BleConnectionState state) {
     switch (state) {
       case BleConnectionState.disconnected:
-        return 'Disconnected';
+        return AppLocalizations.of(context)!.disconnected;
       case BleConnectionState.scanning:
-        return 'Scanning...';
+        return AppLocalizations.of(context)!.scanning;
       case BleConnectionState.connecting:
-        return 'Connecting...';
+        return AppLocalizations.of(context)!.connecting;
       case BleConnectionState.connected:
-        return 'Connected';
+        return AppLocalizations.of(context)!.connected;
     }
   }
 
-  String _getStatusDescription(BleProvider bleProvider) {
+  String _getStatusDescription(BuildContext context, BleProvider bleProvider) {
     switch (bleProvider.connectionState) {
       case BleConnectionState.disconnected:
         if (bleProvider.availableDevices.isEmpty) {
-          return 'Tap scan to find your smart plant device';
+          return AppLocalizations.of(context)!.tapScanToFind;
         } else {
-          return '${bleProvider.availableDevices.length} device(s) found';
+          return AppLocalizations.of(context)!.devicesFound(bleProvider.availableDevices.length);
         }
       case BleConnectionState.scanning:
-        return 'Looking for smart plant devices...';
+        return AppLocalizations.of(context)!.lookingForDevices;
       case BleConnectionState.connecting:
-        return 'Establishing connection...';
+        return AppLocalizations.of(context)!.establishingConnection;
       case BleConnectionState.connected:
-        return bleProvider.connectedDevice?.platformName ?? 'Unknown device';
+        return bleProvider.connectedDevice?.platformName ?? AppLocalizations.of(context)!.unknownDevice;
     }
   }
 }

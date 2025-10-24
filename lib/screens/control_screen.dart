@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../providers/ble_provider.dart';
 import '../providers/sensor_data_provider.dart';
 import '../models/sensor_data.dart';
+import '../l10n/app_localizations.dart';
 
 class ControlScreen extends StatefulWidget {
   const ControlScreen({super.key});
@@ -20,7 +21,7 @@ class _ControlScreenState extends State<ControlScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manual Control'),
+        title: Text(AppLocalizations.of(context)!.manualControl),
       ),
       body: Consumer2<BleProvider, SensorDataProvider>(
         builder: (context, bleProvider, sensorProvider, child) {
@@ -49,7 +50,7 @@ class _ControlScreenState extends State<ControlScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Device Not Connected',
+                                AppLocalizations.of(context)!.deviceNotConnected,
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: Colors.orange[800],
                                   fontWeight: FontWeight.w600,
@@ -57,7 +58,7 @@ class _ControlScreenState extends State<ControlScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                'Connect to your smart plant device to use manual controls',
+                                AppLocalizations.of(context)!.connectToUseControls,
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: Colors.orange[700],
                                 ),
@@ -72,7 +73,7 @@ class _ControlScreenState extends State<ControlScreen> {
                 // Current Sensor Status
                 if (sensorProvider.hasData) ...[
                   Text(
-                    'Plant Status',
+                    AppLocalizations.of(context)!.plantStatus,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 12),
@@ -87,20 +88,20 @@ class _ControlScreenState extends State<ControlScreen> {
                               Expanded(
                                 child: _buildStatusItem(
                                   icon: MdiIcons.waterPercent,
-                                  label: 'Soil Moisture',
+                                  label: AppLocalizations.of(context)!.soilMoisture,
                                   value: sensorProvider.latestSensorData!.soilMoisturePercentage,
                                   color: _getSoilMoistureColor(sensorProvider.soilMoistureLevel!),
-                                  status: _getSoilMoistureStatus(sensorProvider.soilMoistureLevel!),
+                                  status: _getSoilMoistureStatus(sensorProvider.soilMoistureLevel!, context),
                                 ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: _buildStatusItem(
                                   icon: MdiIcons.thermometer,
-                                  label: 'Temperature',
+                                  label: AppLocalizations.of(context)!.temperature,
                                   value: sensorProvider.latestSensorData!.temperatureCelsius,
                                   color: Colors.orange,
-                                  status: _getTemperatureStatus(sensorProvider.temperatureCelsius!),
+                                  status: _getTemperatureStatus(sensorProvider.temperatureCelsius!, context),
                                 ),
                               ),
                             ],
@@ -111,10 +112,10 @@ class _ControlScreenState extends State<ControlScreen> {
                               Expanded(
                                 child: _buildStatusItem(
                                   icon: MdiIcons.waterOutline,
-                                  label: 'Humidity',
+                                  label: AppLocalizations.of(context)!.humidity,
                                   value: sensorProvider.latestSensorData!.humidityPercentage,
                                   color: Colors.blue,
-                                  status: 'Normal',
+                                  status: AppLocalizations.of(context)!.normal,
                                 ),
                               ),
                             ],
@@ -128,7 +129,7 @@ class _ControlScreenState extends State<ControlScreen> {
 
                 // Manual Watering Control
                 Text(
-                  'Manual Watering',
+                  AppLocalizations.of(context)!.manualWatering,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 12),
@@ -144,7 +145,7 @@ class _ControlScreenState extends State<ControlScreen> {
                             Icon(MdiIcons.timer, color: Theme.of(context).colorScheme.primary),
                             const SizedBox(width: 12),
                             Text(
-                              'Duration',
+                              AppLocalizations.of(context)!.duration,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ],
@@ -183,7 +184,7 @@ class _ControlScreenState extends State<ControlScreen> {
 
                         // Quick Duration Buttons
                         Text(
-                          'Quick Select',
+                          AppLocalizations.of(context)!.quickSelect,
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: Colors.grey[600],
                           ),
@@ -236,9 +237,9 @@ class _ControlScreenState extends State<ControlScreen> {
                                 Icon(_isWatering ? MdiIcons.stop : MdiIcons.waterPump),
                                 const SizedBox(width: 8),
                                 Text(
-                                  _isWatering 
-                                      ? 'Stop Watering' 
-                                      : 'Start Watering',
+                                  _isWatering
+                                      ? AppLocalizations.of(context)!.stopWatering
+                                      : AppLocalizations.of(context)!.startWatering,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -252,7 +253,7 @@ class _ControlScreenState extends State<ControlScreen> {
                         if (!bleProvider.isConnected) ...[
                           const SizedBox(height: 12),
                           Text(
-                            'Connect to device to enable manual control',
+                            AppLocalizations.of(context)!.connectToEnableControl,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Colors.grey[600],
                             ),
@@ -268,7 +269,7 @@ class _ControlScreenState extends State<ControlScreen> {
 
                 // Emergency Controls
                 Text(
-                  'Emergency Controls',
+                  AppLocalizations.of(context)!.emergencyControls,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 12),
@@ -280,8 +281,8 @@ class _ControlScreenState extends State<ControlScreen> {
                       children: [
                         ListTile(
                           leading: Icon(MdiIcons.stopCircle, color: Colors.red),
-                          title: const Text('Emergency Stop'),
-                          subtitle: const Text('Immediately stop all watering'),
+                          title: Text(AppLocalizations.of(context)!.emergencyStop),
+                          subtitle: Text(AppLocalizations.of(context)!.immediatelyStopWatering),
                           trailing: ElevatedButton(
                             onPressed: bleProvider.isConnected 
                                 ? () => _emergencyStop(bleProvider)
@@ -290,7 +291,7 @@ class _ControlScreenState extends State<ControlScreen> {
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
                             ),
-                            child: const Text('STOP'),
+                            child: Text(AppLocalizations.of(context)!.stop),
                           ),
                         ),
                       ],
@@ -374,24 +375,24 @@ class _ControlScreenState extends State<ControlScreen> {
     }
   }
 
-  String _getSoilMoistureStatus(SoilMoistureLevel level) {
+  String _getSoilMoistureStatus(SoilMoistureLevel level, BuildContext context) {
     switch (level) {
       case SoilMoistureLevel.low:
-        return 'Needs Water';
+        return AppLocalizations.of(context)!.needsWater;
       case SoilMoistureLevel.medium:
-        return 'Moderate';
+        return AppLocalizations.of(context)!.moderate;
       case SoilMoistureLevel.high:
-        return 'Well Watered';
+        return AppLocalizations.of(context)!.wellWatered;
     }
   }
 
 
-  String _getTemperatureStatus(double temperature) {
-    if (temperature < 15) return 'Cold';
-    if (temperature < 25) return 'Cool';
-    if (temperature < 30) return 'Optimal';
-    if (temperature < 35) return 'Warm';
-    return 'Hot';
+  String _getTemperatureStatus(double temperature, BuildContext context) {
+    if (temperature < 15) return AppLocalizations.of(context)!.cold;
+    if (temperature < 25) return AppLocalizations.of(context)!.cool;
+    if (temperature < 30) return AppLocalizations.of(context)!.optimal;
+    if (temperature < 35) return AppLocalizations.of(context)!.warm;
+    return AppLocalizations.of(context)!.hot;
   }
 
   void _startWatering(BleProvider bleProvider) async {
@@ -405,7 +406,7 @@ class _ControlScreenState extends State<ControlScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Watering started for ${_formatDuration(_wateringDuration.round())}'),
+            content: Text(AppLocalizations.of(context)!.wateringStartedFor(_formatDuration(_wateringDuration.round()))),
             backgroundColor: Colors.green,
           ),
         );
@@ -427,7 +428,7 @@ class _ControlScreenState extends State<ControlScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to start watering: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToStartWatering(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -444,8 +445,8 @@ class _ControlScreenState extends State<ControlScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Watering stopped'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.wateringStopped),
             backgroundColor: Colors.orange,
           ),
         );
@@ -454,7 +455,7 @@ class _ControlScreenState extends State<ControlScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to stop watering: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToStopWatering(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -471,8 +472,8 @@ class _ControlScreenState extends State<ControlScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('EMERGENCY STOP - All watering stopped'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.emergencyStopAll),
             backgroundColor: Colors.red,
           ),
         );
@@ -481,7 +482,7 @@ class _ControlScreenState extends State<ControlScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Emergency stop failed: $e'),
+            content: Text(AppLocalizations.of(context)!.emergencyStopFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

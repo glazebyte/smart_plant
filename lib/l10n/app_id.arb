@@ -1,0 +1,802 @@
+{
+  "@@locale": "id",
+  "appTitle": "Monitor Tanaman Pintar",
+  "@appTitle": {
+    "description": "Judul aplikasi"
+  },
+  
+  "dashboard": "Beranda",
+  "@dashboard": {
+    "description": "Label tab beranda"
+  },
+  
+  "control": "Kontrol",
+  "@control": {
+    "description": "Label tab kontrol"
+  },
+  
+  "schedule": "Jadwal",
+  "@schedule": {
+    "description": "Label tab jadwal"
+  },
+  
+  "logs": "Riwayat",
+  "@logs": {
+    "description": "Label tab riwayat"
+  },
+  
+  "settings": "Pengaturan",
+  "@settings": {
+    "description": "Label tab pengaturan"
+  },
+  
+  "soilMoisture": "Kelembaban Tanah",
+  "@soilMoisture": {
+    "description": "Label sensor kelembaban tanah"
+  },
+  
+  "humidity": "Kelembaban Udara",
+  "@humidity": {
+    "description": "Label sensor kelembaban udara"
+  },
+  
+  "temperature": "Suhu",
+  "@temperature": {
+    "description": "Label sensor suhu"
+  },
+  
+  "currentReadings": "Pembacaan Saat Ini",
+  "@currentReadings": {
+    "description": "Header untuk pembacaan sensor saat ini"
+  },
+  
+  "noSensorData": "Tidak ada data sensor",
+  "@noSensorData": {
+    "description": "Pesan ketika tidak ada data sensor"
+  },
+  
+  "waitingForData": "Menunggu data dari tanaman pintar Anda...",
+  "@waitingForData": {
+    "description": "Pesan ketika menunggu data sensor"
+  },
+  
+  "connectToViewData": "Hubungkan ke tanaman pintar Anda untuk melihat data",
+  "@connectToViewData": {
+    "description": "Pesan ketika perangkat tidak terhubung"
+  },
+  
+  "lastUpdate": "Pembaruan Terakhir",
+  "@lastUpdate": {
+    "description": "Label untuk waktu pembaruan terakhir"
+  },
+  
+  "justNow": "Baru saja",
+  "@justNow": {
+    "description": "Format waktu untuk baru saja"
+  },
+  
+  "minutesAgo": "{minutes} menit lalu",
+  "@minutesAgo": {
+    "description": "Format waktu untuk menit yang lalu",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "hoursAgo": "{hours} jam lalu",
+  "@hoursAgo": {
+    "description": "Format waktu untuk jam yang lalu",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "deviceConnection": "Koneksi Perangkat",
+  "@deviceConnection": {
+    "description": "Judul layar koneksi perangkat"
+  },
+  
+  "disconnected": "Terputus",
+  "@disconnected": {
+    "description": "Status koneksi: terputus"
+  },
+  
+  "scanning": "Memindai...",
+  "@scanning": {
+    "description": "Status koneksi: memindai"
+  },
+  
+  "connecting": "Menghubungkan...",
+  "@connecting": {
+    "description": "Status koneksi: menghubungkan"
+  },
+  
+  "connected": "Terhubung",
+  "@connected": {
+    "description": "Status koneksi: terhubung"
+  },
+  
+  "connectionError": "Kesalahan Koneksi",
+  "@connectionError": {
+    "description": "Header kesalahan koneksi"
+  },
+  
+  "noDevicesFound": "Tidak ada perangkat ditemukan",
+  "@noDevicesFound": {
+    "description": "Pesan ketika tidak ada perangkat ditemukan"
+  },
+  
+  "devicePairingInstructions": "Pastikan perangkat tanaman pintar Anda menyala\ndan dalam mode pairing",
+  "@devicePairingInstructions": {
+    "description": "Instruksi untuk pairing perangkat"
+  },
+  
+  "scanAgain": "Pindai Lagi",
+  "@scanAgain": {
+    "description": "Tombol untuk memindai perangkat lagi"
+  },
+  
+  "scanForDevices": "Pindai Perangkat",
+  "@scanForDevices": {
+    "description": "Tombol untuk memindai perangkat"
+  },
+  
+  "scanningForDevices": "Memindai perangkat tanaman pintar...",
+  "@scanningForDevices": {
+    "description": "Pesan ketika memindai perangkat"
+  },
+  
+  "disconnect": "Putuskan",
+  "@disconnect": {
+    "description": "Tombol untuk memutuskan koneksi perangkat"
+  },
+  
+  "connectedTo": "Terhubung ke {deviceName}",
+  "@connectedTo": {
+    "description": "Pesan ketika terhubung ke perangkat",
+    "placeholders": {
+      "deviceName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "failedToConnect": "Gagal menghubungkan: {error}",
+  "@failedToConnect": {
+    "description": "Pesan kesalahan ketika koneksi gagal",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "manualControl": "Kontrol Manual",
+  "@manualControl": {
+    "description": "Judul layar kontrol manual"
+  },
+  
+  "deviceNotConnected": "Perangkat Tidak Terhubung",
+  "@deviceNotConnected": {
+    "description": "Peringatan ketika perangkat tidak terhubung"
+  },
+  
+  "connectToUseControls": "Hubungkan ke perangkat tanaman pintar Anda untuk menggunakan kontrol manual",
+  "@connectToUseControls": {
+    "description": "Pesan untuk menghubungkan perangkat untuk kontrol"
+  },
+  
+  "plantStatus": "Status Tanaman",
+  "@plantStatus": {
+    "description": "Header bagian status tanaman"
+  },
+  
+  "needsWater": "Perlu Air",
+  "@needsWater": {
+    "description": "Status kelembaban tanah: perlu air"
+  },
+  
+  "moderate": "Sedang",
+  "@moderate": {
+    "description": "Status kelembaban tanah: sedang"
+  },
+  
+  "wellWatered": "Sudah Disiram",
+  "@wellWatered": {
+    "description": "Status kelembaban tanah: sudah disiram"
+  },
+  
+  "cold": "Dingin",
+  "@cold": {
+    "description": "Status suhu: dingin"
+  },
+  
+  "cool": "Sejuk",
+  "@cool": {
+    "description": "Status suhu: sejuk"
+  },
+  
+  "optimal": "Optimal",
+  "@optimal": {
+    "description": "Status suhu: optimal"
+  },
+  
+  "warm": "Hangat",
+  "@warm": {
+    "description": "Status suhu: hangat"
+  },
+  
+  "hot": "Panas",
+  "@hot": {
+    "description": "Status suhu: panas"
+  },
+  
+  "normal": "Normal",
+  "@normal": {
+    "description": "Status umum: normal"
+  },
+  
+  "manualWatering": "Penyiraman Manual",
+  "@manualWatering": {
+    "description": "Header bagian penyiraman manual"
+  },
+  
+  "duration": "Durasi",
+  "@duration": {
+    "description": "Label durasi"
+  },
+  
+  "quickSelect": "Pilih Cepat",
+  "@quickSelect": {
+    "description": "Header pilih durasi cepat"
+  },
+  
+  "startWatering": "Mulai Menyiram",
+  "@startWatering": {
+    "description": "Tombol untuk memulai penyiraman"
+  },
+  
+  "stopWatering": "Hentikan Penyiraman",
+  "@stopWatering": {
+    "description": "Tombol untuk menghentikan penyiraman"
+  },
+  
+  "connectToEnableControl": "Hubungkan ke perangkat untuk mengaktifkan kontrol manual",
+  "@connectToEnableControl": {
+    "description": "Pesan untuk menghubungkan untuk kontrol manual"
+  },
+  
+  "emergencyControls": "Kontrol Darurat",
+  "@emergencyControls": {
+    "description": "Header bagian kontrol darurat"
+  },
+  
+  "emergencyStop": "Henti Darurat",
+  "@emergencyStop": {
+    "description": "Tombol henti darurat"
+  },
+  
+  "immediatelyStopWatering": "Segera hentikan semua penyiraman",
+  "@immediatelyStopWatering": {
+    "description": "Deskripsi henti darurat"
+  },
+  
+  "stop": "HENTI",
+  "@stop": {
+    "description": "Teks tombol henti"
+  },
+  
+  "wateringStartedFor": "Penyiraman dimulai selama {duration}",
+  "@wateringStartedFor": {
+    "description": "Pesan ketika penyiraman dimulai",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "failedToStartWatering": "Gagal memulai penyiraman: {error}",
+  "@failedToStartWatering": {
+    "description": "Kesalahan ketika penyiraman gagal dimulai",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "wateringStopped": "Penyiraman dihentikan",
+  "@wateringStopped": {
+    "description": "Pesan ketika penyiraman dihentikan"
+  },
+  
+  "failedToStopWatering": "Gagal menghentikan penyiraman: {error}",
+  "@failedToStopWatering": {
+    "description": "Kesalahan ketika penyiraman gagal dihentikan",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "emergencyStopAll": "HENTI DARURAT - Semua penyiraman dihentikan",
+  "@emergencyStopAll": {
+    "description": "Pesan konfirmasi henti darurat"
+  },
+  
+  "emergencyStopFailed": "Henti darurat gagal: {error}",
+  "@emergencyStopFailed": {
+    "description": "Pesan kegagalan henti darurat",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "wateringSchedule": "Jadwal Penyiraman",
+  "@wateringSchedule": {
+    "description": "Judul layar jadwal penyiraman"
+  },
+  
+  "connectToManageSchedules": "Hubungkan ke perangkat Anda untuk mengelola jadwal penyiraman",
+  "@connectToManageSchedules": {
+    "description": "Pesan untuk menghubungkan untuk pengelolaan jadwal"
+  },
+  
+  "noSchedulesYet": "Belum Ada Jadwal",
+  "@noSchedulesYet": {
+    "description": "Pesan ketika belum ada jadwal"
+  },
+  
+  "addFirstSchedule": "Tambahkan jadwal penyiraman pertama Anda untuk\nmenjaga tanaman tetap sehat secara otomatis",
+  "@addFirstSchedule": {
+    "description": "Instruksi untuk menambah jadwal pertama"
+  },
+  
+  "addSchedule": "Tambah Jadwal",
+  "@addSchedule": {
+    "description": "Tombol untuk menambah jadwal"
+  },
+  
+  "scheduleSlot": "Jadwal {slot}",
+  "@scheduleSlot": {
+    "description": "Label slot jadwal",
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "nextScheduled": "Berikutnya: {time}",
+  "@nextScheduled": {
+    "description": "Waktu jadwal berikutnya",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "edit": "Edit",
+  "@edit": {
+    "description": "Tombol edit"
+  },
+  
+  "delete": "Hapus",
+  "@delete": {
+    "description": "Tombol hapus"
+  },
+  
+  "deleteSchedule": "Hapus Jadwal",
+  "@deleteSchedule": {
+    "description": "Judul dialog hapus jadwal"
+  },
+  
+  "deleteScheduleConfirm": "Apakah Anda yakin ingin menghapus Jadwal {slot}?",
+  "@deleteScheduleConfirm": {
+    "description": "Konfirmasi hapus jadwal",
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "cancel": "Batal",
+  "@cancel": {
+    "description": "Tombol batal"
+  },
+  
+  "newSchedule": "Jadwal Baru",
+  "@newSchedule": {
+    "description": "Judul dialog jadwal baru"
+  },
+  
+  "editSchedule": "Edit Jadwal",
+  "@editSchedule": {
+    "description": "Judul dialog edit jadwal"
+  },
+  
+  "wateringTime": "Waktu Penyiraman",
+  "@wateringTime": {
+    "description": "Label field waktu penyiraman"
+  },
+  
+  "enableSchedule": "Aktifkan Jadwal",
+  "@enableSchedule": {
+    "description": "Label switch aktifkan jadwal"
+  },
+  
+  "save": "Simpan",
+  "@save": {
+    "description": "Tombol simpan"
+  },
+  
+  "failedToLoadSchedules": "Gagal memuat jadwal: {error}",
+  "@failedToLoadSchedules": {
+    "description": "Kesalahan memuat jadwal",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "scheduleSavedSuccessfully": "Jadwal berhasil disimpan",
+  "@scheduleSavedSuccessfully": {
+    "description": "Pesan berhasil simpan jadwal"
+  },
+  
+  "failedToSaveSchedule": "Gagal menyimpan jadwal: {error}",
+  "@failedToSaveSchedule": {
+    "description": "Kesalahan menyimpan jadwal",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "dataLogs": "Log Data",
+  "@dataLogs": {
+    "description": "Judul layar log data"
+  },
+  
+  "charts": "Grafik",
+  "@charts": {
+    "description": "Label tab grafik"
+  },
+  
+  "history": "Riwayat",
+  "@history": {
+    "description": "Label tab riwayat"
+  },
+  
+  "noChartData": "Tidak Ada Data Grafik",
+  "@noChartData": {
+    "description": "Pesan ketika tidak ada data grafik"
+  },
+  
+  "connectForCharts": "Hubungkan ke perangkat Anda dan tunggu\ndata sensor untuk melihat grafik",
+  "@connectForCharts": {
+    "description": "Instruksi untuk mendapatkan data grafik"
+  },
+  
+  "noLogData": "Tidak Ada Data Log",
+  "@noLogData": {
+    "description": "Pesan ketika tidak ada data log"
+  },
+  
+  "tapDownloadLogs": "Ketuk tombol unduh untuk mengambil\ndata log dari perangkat Anda",
+  "@tapDownloadLogs": {
+    "description": "Instruksi untuk mengunduh log"
+  },
+  
+  "downloadLogs": "Unduh Log",
+  "@downloadLogs": {
+    "description": "Tombol unduh log"
+  },
+  
+  "connectToDownloadLogs": "Hubungkan ke perangkat untuk mengunduh data log",
+  "@connectToDownloadLogs": {
+    "description": "Pesan untuk menghubungkan untuk unduh log"
+  },
+  
+  "timeRange": "Rentang Waktu",
+  "@timeRange": {
+    "description": "Label pemilih rentang waktu"
+  },
+  
+  "hours24": "24 Jam",
+  "@hours24": {
+    "description": "Rentang waktu 24 jam"
+  },
+  
+  "days7": "7 Hari",
+  "@days7": {
+    "description": "Rentang waktu 7 hari"
+  },
+  
+  "days30": "30 Hari",
+  "@days30": {
+    "description": "Rentang waktu 30 hari"
+  },
+  
+  "logDataRequested": "Data log berhasil diminta",
+  "@logDataRequested": {
+    "description": "Pesan berhasil minta log"
+  },
+  
+  "failedToRequestLogs": "Gagal meminta log: {error}",
+  "@failedToRequestLogs": {
+    "description": "Pesan kesalahan minta log",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "device": "Perangkat",
+  "@device": {
+    "description": "Bagian pengaturan perangkat"
+  },
+  
+  "notConnected": "Tidak terhubung",
+  "@notConnected": {
+    "description": "Status perangkat tidak terhubung"
+  },
+  
+  "connect": "Hubungkan",
+  "@connect": {
+    "description": "Tombol hubungkan"
+  },
+  
+  "syncDeviceTime": "Sinkronkan Waktu Perangkat",
+  "@syncDeviceTime": {
+    "description": "Opsi sinkronkan waktu perangkat"
+  },
+  
+  "updateDeviceRTC": "Perbarui RTC perangkat dengan waktu saat ini",
+  "@updateDeviceRTC": {
+    "description": "Deskripsi perbarui RTC perangkat"
+  },
+  
+  "dataManagement": "Pengelolaan Data",
+  "@dataManagement": {
+    "description": "Bagian pengelolaan data"
+  },
+  
+  "clearLocalData": "Hapus Data Lokal",
+  "@clearLocalData": {
+    "description": "Opsi hapus data lokal"
+  },
+  
+  "removeStoredReadings": "Hapus semua pembacaan sensor tersimpan ({count} entri)",
+  "@removeStoredReadings": {
+    "description": "Deskripsi hapus data",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "downloadDeviceLogs": "Unduh Log Perangkat",
+  "@downloadDeviceLogs": {
+    "description": "Opsi unduh log perangkat"
+  },
+  
+  "fetchHistoricalData": "Ambil data historis dari perangkat",
+  "@fetchHistoricalData": {
+    "description": "Deskripsi unduh log"
+  },
+  
+  "about": "Tentang",
+  "@about": {
+    "description": "Bagian tentang"
+  },
+  
+  "version": "Versi 1.0.0",
+  "@version": {
+    "description": "Versi aplikasi"
+  },
+  
+  "deviceInfo": "Info Perangkat",
+  "@deviceInfo": {
+    "description": "Opsi info perangkat"
+  },
+  
+  "esp32System": "Sistem Monitor Tanaman Pintar ESP32",
+  "@esp32System": {
+    "description": "Deskripsi sistem ESP32"
+  },
+  
+  "madeWithFlutter": "Dibuat dengan Flutter",
+  "@madeWithFlutter": {
+    "description": "Label dibuat dengan Flutter"
+  },
+  
+  "builtForPlantCare": "Dibuat untuk pecinta perawatan tanaman",
+  "@builtForPlantCare": {
+    "description": "Deskripsi tujuan aplikasi"
+  },
+  
+  "currentStatus": "Status Saat Ini",
+  "@currentStatus": {
+    "description": "Bagian status saat ini"
+  },
+  
+  "deviceTimeSynced": "Waktu perangkat berhasil disinkronkan",
+  "@deviceTimeSynced": {
+    "description": "Pesan berhasil sinkron waktu"
+  },
+  
+  "failedToSyncTime": "Gagal menyinkronkan waktu: {error}",
+  "@failedToSyncTime": {
+    "description": "Pesan kesalahan sinkron waktu",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "clearLocalDataConfirm": "Ini akan menghapus semua pembacaan sensor yang tersimpan dari perangkat Anda. Tindakan ini tidak dapat dibatalkan.\n\nApakah Anda yakin ingin melanjutkan?",
+  "@clearLocalDataConfirm": {
+    "description": "Pesan konfirmasi hapus data"
+  },
+  
+  "clearData": "Hapus Data",
+  "@clearData": {
+    "description": "Tombol hapus data"
+  },
+  
+  "localDataCleared": "Data lokal berhasil dihapus",
+  "@localDataCleared": {
+    "description": "Pesan berhasil hapus data"
+  },
+  
+  "logDownloadRequested": "Unduhan log diminta. Periksa tab Log.",
+  "@logDownloadRequested": {
+    "description": "Pesan permintaan unduh log"
+  },
+  
+  "good": "Bagus",
+  "@good": {
+    "description": "Indikator status bagus"
+  },
+  
+  "low": "Rendah",
+  "@low": {
+    "description": "Indikator status rendah"
+  },
+  
+  "scan": "Pindai",
+  "@scan": {
+    "description": "Teks tombol pindai"
+  },
+  
+  "tapScanToFind": "Ketuk pindai untuk menemukan perangkat tanaman pintar Anda",
+  "@tapScanToFind": {
+    "description": "Instruksi untuk memindai perangkat"
+  },
+  
+  "devicesFound": "{count} perangkat ditemukan",
+  "@devicesFound": {
+    "description": "Jumlah perangkat yang ditemukan",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "lookingForDevices": "Mencari perangkat tanaman pintar...",
+  "@lookingForDevices": {
+    "description": "Status ketika memindai perangkat"
+  },
+  
+  "establishingConnection": "Membuat koneksi...",
+  "@establishingConnection": {
+    "description": "Status ketika menghubungkan ke perangkat"
+  },
+  
+  "unknownDevice": "Perangkat tidak dikenal",
+  "@unknownDevice": {
+    "description": "Label untuk perangkat tidak dikenal"
+  },
+  
+  "quickActions": "Aksi Cepat",
+  "@quickActions": {
+    "description": "Judul bagian aksi cepat"
+  },
+  
+  "waterNow": "Siram Sekarang",
+  "@waterNow": {
+    "description": "Tombol aksi cepat untuk menyiram sekarang"
+  },
+  
+  "seconds30": "30 detik",
+  "@seconds30": {
+    "description": "Durasi 30 detik"
+  },
+  
+  "syncTime": "Sinkron Waktu",
+  "@syncTime": {
+    "description": "Tombol aksi cepat untuk sinkron waktu"
+  },
+  
+  "updateRTC": "Perbarui RTC",
+  "@updateRTC": {
+    "description": "Subtitle perbarui RTC"
+  },
+  
+  "refreshData": "Segarkan Data",
+  "@refreshData": {
+    "description": "Tombol aksi cepat untuk menyegarkan data"
+  },
+  
+  "getLatest": "Dapatkan terbaru",
+  "@getLatest": {
+    "description": "Subtitle dapatkan data terbaru"
+  },
+  
+  "viewLogs": "Lihat Log",
+  "@viewLogs": {
+    "description": "Tombol aksi cepat untuk melihat log"
+  },
+  
+  "dataHistory": "Riwayat data",
+  "@dataHistory": {
+    "description": "Subtitle riwayat data"
+  },
+  
+  "connectToUseQuickActions": "Hubungkan ke tanaman pintar Anda untuk menggunakan aksi cepat",
+  "@connectToUseQuickActions": {
+    "description": "Pesan untuk menghubungkan perangkat untuk aksi cepat"
+  },
+  
+  "waterPlant": "Siram Tanaman",
+  "@waterPlant": {
+    "description": "Judul dialog siram tanaman"
+  },
+  
+  "selectWateringDuration": "Pilih durasi penyiraman:",
+  "@selectWateringDuration": {
+    "description": "Instruksi pilih durasi penyiraman"
+  },
+  
+  "durationSeconds": "Durasi: {duration} detik",
+  "@durationSeconds": {
+    "description": "Durasi dalam detik",
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "timeSynchronizedSuccessfully": "Waktu berhasil disinkronkan",
+  "@timeSynchronizedSuccessfully": {
+    "description": "Pesan berhasil sinkron waktu"
+  },
+  
+  "dataRefreshRequested": "Penyegaran data diminta",
+  "@dataRefreshRequested": {
+    "description": "Pesan permintaan penyegaran data"
+  },
+  
+  "logDataRequestedShort": "Data log diminta",
+  "@logDataRequestedShort": {
+    "description": "Pesan permintaan data log singkat"
+  }
+}

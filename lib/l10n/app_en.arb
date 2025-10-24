@@ -1,0 +1,802 @@
+{
+  "@@locale": "en",
+  "appTitle": "Smart Plant Monitor",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard tab label"
+  },
+  
+  "control": "Control",
+  "@control": {
+    "description": "Control tab label"
+  },
+  
+  "schedule": "Schedule",
+  "@schedule": {
+    "description": "Schedule tab label"
+  },
+  
+  "logs": "Logs",
+  "@logs": {
+    "description": "Logs tab label"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings tab label"
+  },
+  
+  "soilMoisture": "Soil Moisture",
+  "@soilMoisture": {
+    "description": "Soil moisture sensor label"
+  },
+  
+  "humidity": "Humidity",
+  "@humidity": {
+    "description": "Humidity sensor label"
+  },
+  
+  "temperature": "Temperature",
+  "@temperature": {
+    "description": "Temperature sensor label"
+  },
+  
+  "currentReadings": "Current Readings",
+  "@currentReadings": {
+    "description": "Header for current sensor readings"
+  },
+  
+  "noSensorData": "No sensor data available",
+  "@noSensorData": {
+    "description": "Message when no sensor data is available"
+  },
+  
+  "waitingForData": "Waiting for data from your smart plant...",
+  "@waitingForData": {
+    "description": "Message when waiting for sensor data"
+  },
+  
+  "connectToViewData": "Connect to your smart plant to view data",
+  "@connectToViewData": {
+    "description": "Message when device is not connected"
+  },
+  
+  "lastUpdate": "Last Update",
+  "@lastUpdate": {
+    "description": "Label for last update time"
+  },
+  
+  "justNow": "Just now",
+  "@justNow": {
+    "description": "Time format for just now"
+  },
+  
+  "minutesAgo": "{minutes}m ago",
+  "@minutesAgo": {
+    "description": "Time format for minutes ago",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "hoursAgo": "{hours}h ago",
+  "@hoursAgo": {
+    "description": "Time format for hours ago",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "deviceConnection": "Device Connection",
+  "@deviceConnection": {
+    "description": "Device connection screen title"
+  },
+  
+  "disconnected": "Disconnected",
+  "@disconnected": {
+    "description": "Connection status: disconnected"
+  },
+  
+  "scanning": "Scanning...",
+  "@scanning": {
+    "description": "Connection status: scanning"
+  },
+  
+  "connecting": "Connecting...",
+  "@connecting": {
+    "description": "Connection status: connecting"
+  },
+  
+  "connected": "Connected",
+  "@connected": {
+    "description": "Connection status: connected"
+  },
+  
+  "connectionError": "Connection Error",
+  "@connectionError": {
+    "description": "Connection error header"
+  },
+  
+  "noDevicesFound": "No devices found",
+  "@noDevicesFound": {
+    "description": "Message when no devices are found"
+  },
+  
+  "devicePairingInstructions": "Make sure your smart plant device is powered on\nand in pairing mode",
+  "@devicePairingInstructions": {
+    "description": "Instructions for device pairing"
+  },
+  
+  "scanAgain": "Scan Again",
+  "@scanAgain": {
+    "description": "Button to scan for devices again"
+  },
+  
+  "scanForDevices": "Scan for Devices",
+  "@scanForDevices": {
+    "description": "Button to scan for devices"
+  },
+  
+  "scanningForDevices": "Scanning for smart plant devices...",
+  "@scanningForDevices": {
+    "description": "Message when scanning for devices"
+  },
+  
+  "disconnect": "Disconnect",
+  "@disconnect": {
+    "description": "Button to disconnect from device"
+  },
+  
+  "connectedTo": "Connected to {deviceName}",
+  "@connectedTo": {
+    "description": "Message when connected to device",
+    "placeholders": {
+      "deviceName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "failedToConnect": "Failed to connect: {error}",
+  "@failedToConnect": {
+    "description": "Error message when connection fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "manualControl": "Manual Control",
+  "@manualControl": {
+    "description": "Manual control screen title"
+  },
+  
+  "deviceNotConnected": "Device Not Connected",
+  "@deviceNotConnected": {
+    "description": "Warning when device is not connected"
+  },
+  
+  "connectToUseControls": "Connect to your smart plant device to use manual controls",
+  "@connectToUseControls": {
+    "description": "Message to connect device for controls"
+  },
+  
+  "plantStatus": "Plant Status",
+  "@plantStatus": {
+    "description": "Plant status section header"
+  },
+  
+  "needsWater": "Needs Water",
+  "@needsWater": {
+    "description": "Soil moisture status: needs water"
+  },
+  
+  "moderate": "Moderate",
+  "@moderate": {
+    "description": "Soil moisture status: moderate"
+  },
+  
+  "wellWatered": "Well Watered",
+  "@wellWatered": {
+    "description": "Soil moisture status: well watered"
+  },
+  
+  "cold": "Cold",
+  "@cold": {
+    "description": "Temperature status: cold"
+  },
+  
+  "cool": "Cool",
+  "@cool": {
+    "description": "Temperature status: cool"
+  },
+  
+  "optimal": "Optimal",
+  "@optimal": {
+    "description": "Temperature status: optimal"
+  },
+  
+  "warm": "Warm",
+  "@warm": {
+    "description": "Temperature status: warm"
+  },
+  
+  "hot": "Hot",
+  "@hot": {
+    "description": "Temperature status: hot"
+  },
+  
+  "normal": "Normal",
+  "@normal": {
+    "description": "General status: normal"
+  },
+  
+  "manualWatering": "Manual Watering",
+  "@manualWatering": {
+    "description": "Manual watering section header"
+  },
+  
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration label"
+  },
+  
+  "quickSelect": "Quick Select",
+  "@quickSelect": {
+    "description": "Quick select duration header"
+  },
+  
+  "startWatering": "Start Watering",
+  "@startWatering": {
+    "description": "Button to start watering"
+  },
+  
+  "stopWatering": "Stop Watering",
+  "@stopWatering": {
+    "description": "Button to stop watering"
+  },
+  
+  "connectToEnableControl": "Connect to device to enable manual control",
+  "@connectToEnableControl": {
+    "description": "Message to connect for manual control"
+  },
+  
+  "emergencyControls": "Emergency Controls",
+  "@emergencyControls": {
+    "description": "Emergency controls section header"
+  },
+  
+  "emergencyStop": "Emergency Stop",
+  "@emergencyStop": {
+    "description": "Emergency stop button"
+  },
+  
+  "immediatelyStopWatering": "Immediately stop all watering",
+  "@immediatelyStopWatering": {
+    "description": "Emergency stop description"
+  },
+  
+  "stop": "STOP",
+  "@stop": {
+    "description": "Stop button text"
+  },
+  
+  "wateringStartedFor": "Watering started for {duration}",
+  "@wateringStartedFor": {
+    "description": "Message when watering starts",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "failedToStartWatering": "Failed to start watering: {error}",
+  "@failedToStartWatering": {
+    "description": "Error when watering fails to start",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "wateringStopped": "Watering stopped",
+  "@wateringStopped": {
+    "description": "Message when watering is stopped"
+  },
+  
+  "failedToStopWatering": "Failed to stop watering: {error}",
+  "@failedToStopWatering": {
+    "description": "Error when watering fails to stop",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "emergencyStopAll": "EMERGENCY STOP - All watering stopped",
+  "@emergencyStopAll": {
+    "description": "Emergency stop confirmation message"
+  },
+  
+  "emergencyStopFailed": "Emergency stop failed: {error}",
+  "@emergencyStopFailed": {
+    "description": "Emergency stop failure message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "wateringSchedule": "Watering Schedule",
+  "@wateringSchedule": {
+    "description": "Watering schedule screen title"
+  },
+  
+  "connectToManageSchedules": "Connect to your device to manage watering schedules",
+  "@connectToManageSchedules": {
+    "description": "Message to connect for schedule management"
+  },
+  
+  "noSchedulesYet": "No Schedules Yet",
+  "@noSchedulesYet": {
+    "description": "Message when no schedules exist"
+  },
+  
+  "addFirstSchedule": "Add your first watering schedule to\nkeep your plant healthy automatically",
+  "@addFirstSchedule": {
+    "description": "Instructions to add first schedule"
+  },
+  
+  "addSchedule": "Add Schedule",
+  "@addSchedule": {
+    "description": "Button to add schedule"
+  },
+  
+  "scheduleSlot": "Schedule {slot}",
+  "@scheduleSlot": {
+    "description": "Schedule slot label",
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "nextScheduled": "Next: {time}",
+  "@nextScheduled": {
+    "description": "Next scheduled time",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button"
+  },
+  
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button"
+  },
+  
+  "deleteSchedule": "Delete Schedule",
+  "@deleteSchedule": {
+    "description": "Delete schedule dialog title"
+  },
+  
+  "deleteScheduleConfirm": "Are you sure you want to delete Schedule {slot}?",
+  "@deleteScheduleConfirm": {
+    "description": "Delete schedule confirmation",
+    "placeholders": {
+      "slot": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  
+  "newSchedule": "New Schedule",
+  "@newSchedule": {
+    "description": "New schedule dialog title"
+  },
+  
+  "editSchedule": "Edit Schedule",
+  "@editSchedule": {
+    "description": "Edit schedule dialog title"
+  },
+  
+  "wateringTime": "Watering Time",
+  "@wateringTime": {
+    "description": "Watering time field label"
+  },
+  
+  "enableSchedule": "Enable Schedule",
+  "@enableSchedule": {
+    "description": "Enable schedule switch label"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  
+  "failedToLoadSchedules": "Failed to load schedules: {error}",
+  "@failedToLoadSchedules": {
+    "description": "Error loading schedules",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "scheduleSavedSuccessfully": "Schedule saved successfully",
+  "@scheduleSavedSuccessfully": {
+    "description": "Schedule save success message"
+  },
+  
+  "failedToSaveSchedule": "Failed to save schedule: {error}",
+  "@failedToSaveSchedule": {
+    "description": "Error saving schedule",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "dataLogs": "Data Logs",
+  "@dataLogs": {
+    "description": "Data logs screen title"
+  },
+  
+  "charts": "Charts",
+  "@charts": {
+    "description": "Charts tab label"
+  },
+  
+  "history": "History",
+  "@history": {
+    "description": "History tab label"
+  },
+  
+  "noChartData": "No Chart Data",
+  "@noChartData": {
+    "description": "Message when no chart data available"
+  },
+  
+  "connectForCharts": "Connect to your device and wait for\nsensor data to view charts",
+  "@connectForCharts": {
+    "description": "Instructions to get chart data"
+  },
+  
+  "noLogData": "No Log Data",
+  "@noLogData": {
+    "description": "Message when no log data available"
+  },
+  
+  "tapDownloadLogs": "Tap the download button to fetch\nlog data from your device",
+  "@tapDownloadLogs": {
+    "description": "Instructions to download logs"
+  },
+  
+  "downloadLogs": "Download Logs",
+  "@downloadLogs": {
+    "description": "Download logs button"
+  },
+  
+  "connectToDownloadLogs": "Connect to device to download log data",
+  "@connectToDownloadLogs": {
+    "description": "Message to connect for log download"
+  },
+  
+  "timeRange": "Time Range",
+  "@timeRange": {
+    "description": "Time range selector label"
+  },
+  
+  "hours24": "24 Hours",
+  "@hours24": {
+    "description": "24 hours time range"
+  },
+  
+  "days7": "7 Days",
+  "@days7": {
+    "description": "7 days time range"
+  },
+  
+  "days30": "30 Days",
+  "@days30": {
+    "description": "30 days time range"
+  },
+  
+  "logDataRequested": "Log data requested successfully",
+  "@logDataRequested": {
+    "description": "Log request success message"
+  },
+  
+  "failedToRequestLogs": "Failed to request logs: {error}",
+  "@failedToRequestLogs": {
+    "description": "Log request error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "device": "Device",
+  "@device": {
+    "description": "Device settings section"
+  },
+  
+  "notConnected": "Not connected",
+  "@notConnected": {
+    "description": "Device not connected status"
+  },
+  
+  "connect": "Connect",
+  "@connect": {
+    "description": "Connect button"
+  },
+  
+  "syncDeviceTime": "Sync Device Time",
+  "@syncDeviceTime": {
+    "description": "Sync device time option"
+  },
+  
+  "updateDeviceRTC": "Update device RTC with current time",
+  "@updateDeviceRTC": {
+    "description": "Update device RTC description"
+  },
+  
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section"
+  },
+  
+  "clearLocalData": "Clear Local Data",
+  "@clearLocalData": {
+    "description": "Clear local data option"
+  },
+  
+  "removeStoredReadings": "Remove all stored sensor readings ({count} entries)",
+  "@removeStoredReadings": {
+    "description": "Clear data description",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "downloadDeviceLogs": "Download Device Logs",
+  "@downloadDeviceLogs": {
+    "description": "Download device logs option"
+  },
+  
+  "fetchHistoricalData": "Fetch historical data from device",
+  "@fetchHistoricalData": {
+    "description": "Download logs description"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About section"
+  },
+  
+  "version": "Version 1.0.0",
+  "@version": {
+    "description": "App version"
+  },
+  
+  "deviceInfo": "Device Info",
+  "@deviceInfo": {
+    "description": "Device info option"
+  },
+  
+  "esp32System": "ESP32 Smart Plant Monitoring System",
+  "@esp32System": {
+    "description": "ESP32 system description"
+  },
+  
+  "madeWithFlutter": "Made with Flutter",
+  "@madeWithFlutter": {
+    "description": "Made with Flutter label"
+  },
+  
+  "builtForPlantCare": "Built for plant care enthusiasts",
+  "@builtForPlantCare": {
+    "description": "App purpose description"
+  },
+  
+  "currentStatus": "Current Status",
+  "@currentStatus": {
+    "description": "Current status section"
+  },
+  
+  "deviceTimeSynced": "Device time synchronized successfully",
+  "@deviceTimeSynced": {
+    "description": "Time sync success message"
+  },
+  
+  "failedToSyncTime": "Failed to sync time: {error}",
+  "@failedToSyncTime": {
+    "description": "Time sync error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "clearLocalDataConfirm": "This will remove all stored sensor readings from your device. This action cannot be undone.\n\nAre you sure you want to continue?",
+  "@clearLocalDataConfirm": {
+    "description": "Clear data confirmation message"
+  },
+  
+  "clearData": "Clear Data",
+  "@clearData": {
+    "description": "Clear data button"
+  },
+  
+  "localDataCleared": "Local data cleared successfully",
+  "@localDataCleared": {
+    "description": "Data clear success message"
+  },
+  
+  "logDownloadRequested": "Log download requested. Check the Logs tab.",
+  "@logDownloadRequested": {
+    "description": "Log download request message"
+  },
+  
+  "good": "Good",
+  "@good": {
+    "description": "Good status indicator"
+  },
+  
+  "low": "Low",
+  "@low": {
+    "description": "Low status indicator"
+  },
+  
+  "scan": "Scan",
+  "@scan": {
+    "description": "Scan button text"
+  },
+  
+  "tapScanToFind": "Tap scan to find your smart plant device",
+  "@tapScanToFind": {
+    "description": "Instruction to scan for devices"
+  },
+  
+  "devicesFound": "{count} device(s) found",
+  "@devicesFound": {
+    "description": "Number of devices found",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "lookingForDevices": "Looking for smart plant devices...",
+  "@lookingForDevices": {
+    "description": "Status when scanning for devices"
+  },
+  
+  "establishingConnection": "Establishing connection...",
+  "@establishingConnection": {
+    "description": "Status when connecting to device"
+  },
+  
+  "unknownDevice": "Unknown device",
+  "@unknownDevice": {
+    "description": "Label for unknown device"
+  },
+  
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Quick actions section title"
+  },
+  
+  "waterNow": "Water Now",
+  "@waterNow": {
+    "description": "Quick action button to water now"
+  },
+  
+  "seconds30": "30 seconds",
+  "@seconds30": {
+    "description": "30 seconds duration"
+  },
+  
+  "syncTime": "Sync Time",
+  "@syncTime": {
+    "description": "Quick action button to sync time"
+  },
+  
+  "updateRTC": "Update RTC",
+  "@updateRTC": {
+    "description": "Update RTC subtitle"
+  },
+  
+  "refreshData": "Refresh Data",
+  "@refreshData": {
+    "description": "Quick action button to refresh data"
+  },
+  
+  "getLatest": "Get latest",
+  "@getLatest": {
+    "description": "Get latest data subtitle"
+  },
+  
+  "viewLogs": "View Logs",
+  "@viewLogs": {
+    "description": "Quick action button to view logs"
+  },
+  
+  "dataHistory": "Data history",
+  "@dataHistory": {
+    "description": "Data history subtitle"
+  },
+  
+  "connectToUseQuickActions": "Connect to your smart plant to use quick actions",
+  "@connectToUseQuickActions": {
+    "description": "Message to connect device for quick actions"
+  },
+  
+  "waterPlant": "Water Plant",
+  "@waterPlant": {
+    "description": "Water plant dialog title"
+  },
+  
+  "selectWateringDuration": "Select watering duration:",
+  "@selectWateringDuration": {
+    "description": "Select watering duration instruction"
+  },
+  
+  "durationSeconds": "Duration: {duration} seconds",
+  "@durationSeconds": {
+    "description": "Duration in seconds",
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "timeSynchronizedSuccessfully": "Time synchronized successfully",
+  "@timeSynchronizedSuccessfully": {
+    "description": "Time sync success message"
+  },
+  
+  "dataRefreshRequested": "Data refresh requested",
+  "@dataRefreshRequested": {
+    "description": "Data refresh request message"
+  },
+  
+  "logDataRequestedShort": "Log data requested",
+  "@logDataRequestedShort": {
+    "description": "Short log data request message"
+  }
+}

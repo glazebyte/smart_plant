@@ -6,6 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import '../providers/ble_provider.dart';
 import '../providers/sensor_data_provider.dart';
 import '../models/log_entry.dart';
+import '../l10n/app_localizations.dart';
 
 class LogsScreen extends StatefulWidget {
   const LogsScreen({super.key});
@@ -34,7 +35,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Data Logs'),
+        title: Text(AppLocalizations.of(context)!.dataLogs),
         actions: [
           Consumer<BleProvider>(
             builder: (context, bleProvider, child) {
@@ -58,11 +59,11 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
           tabs: [
             Tab(
               icon: Icon(MdiIcons.chartLine),
-              text: 'Charts',
+              text: AppLocalizations.of(context)!.charts,
             ),
             Tab(
               icon: Icon(MdiIcons.formatListBulleted),
-              text: 'History',
+              text: AppLocalizations.of(context)!.history,
             ),
           ],
         ),
@@ -95,7 +96,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
 
               // Soil Moisture Chart
               _buildChartCard(
-                title: 'Soil Moisture',
+                title: AppLocalizations.of(context)!.soilMoisture,
                 icon: MdiIcons.waterPercent,
                 color: Colors.blue,
                 data: _getSoilMoistureData(sensorProvider),
@@ -105,7 +106,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
 
               // Temperature Chart
               _buildChartCard(
-                title: 'Temperature',
+                title: AppLocalizations.of(context)!.temperature,
                 icon: MdiIcons.thermometer,
                 color: Colors.orange,
                 data: _getTemperatureData(sensorProvider),
@@ -115,7 +116,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
 
               // Humidity Chart
               _buildChartCard(
-                title: 'Humidity',
+                title: AppLocalizations.of(context)!.humidity,
                 icon: MdiIcons.waterOutline,
                 color: Colors.teal,
                 data: _getHumidityData(sensorProvider),
@@ -152,7 +153,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        'Connect to device to download log data',
+                        AppLocalizations.of(context)!.connectToDownloadLogs,
                         style: TextStyle(color: Colors.orange[800]),
                       ),
                     ),
@@ -184,16 +185,16 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
           ),
           const SizedBox(height: 16),
           Text(
-            'No Chart Data',
+            AppLocalizations.of(context)!.noChartData,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: Colors.grey,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Connect to your device and wait for\nsensor data to view charts',
+          Text(
+            AppLocalizations.of(context)!.connectForCharts,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           ),
         ],
       ),
@@ -212,16 +213,16 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
           ),
           const SizedBox(height: 16),
           Text(
-            'No Log Data',
+            AppLocalizations.of(context)!.noLogData,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: Colors.grey,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Tap the download button to fetch\nlog data from your device',
+          Text(
+            AppLocalizations.of(context)!.tapDownloadLogs,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           ),
           const SizedBox(height: 24),
           Consumer<BleProvider>(
@@ -230,7 +231,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                 onPressed:
                     bleProvider.isConnected && !_isLoadingLogs ? _requestLogs : null,
                 icon: Icon(MdiIcons.download),
-                label: const Text('Download Logs'),
+                label: Text(AppLocalizations.of(context)!.downloadLogs),
               );
             },
           ),
@@ -247,7 +248,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Time Range',
+              AppLocalizations.of(context)!.timeRange,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -258,7 +259,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                     onPressed: () {
                       // TODO: Implement 24h filter
                     },
-                    child: const Text('24 Hours'),
+                    child: Text(AppLocalizations.of(context)!.hours24),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -267,7 +268,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                     onPressed: () {
                       // TODO: Implement 7d filter
                     },
-                    child: const Text('7 Days'),
+                    child: Text(AppLocalizations.of(context)!.days7),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -276,7 +277,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                     onPressed: () {
                       // TODO: Implement 30d filter
                     },
-                    child: const Text('30 Days'),
+                    child: Text(AppLocalizations.of(context)!.days30),
                   ),
                 ),
               ],
@@ -391,21 +392,21 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
                     if (log.soilMoisture != null)
                       _buildLogDetailRow(
                         icon: MdiIcons.waterPercent,
-                        label: 'Soil Moisture',
+                        label: AppLocalizations.of(context)!.soilMoisture,
                         value: log.soilMoisturePercentage,
                         color: Colors.blue,
                       ),
                     if (log.humidity != null)
                       _buildLogDetailRow(
                         icon: MdiIcons.waterOutline,
-                        label: 'Humidity',
+                        label: AppLocalizations.of(context)!.humidity,
                         value: log.humidityPercentage,
                         color: Colors.teal,
                       ),
                     if (log.temperature != null)
                       _buildLogDetailRow(
                         icon: MdiIcons.thermometer,
-                        label: 'Temperature',
+                        label: AppLocalizations.of(context)!.temperature,
                         value: log.temperatureCelsius,
                         color: Colors.orange,
                       ),
@@ -529,8 +530,8 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Log data requested successfully'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.logDataRequested),
             backgroundColor: Colors.green,
           ),
         );
@@ -543,7 +544,7 @@ class _LogsScreenState extends State<LogsScreen> with SingleTickerProviderStateM
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to request logs: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToRequestLogs(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../providers/ble_provider.dart';
 import '../providers/sensor_data_provider.dart';
 import '../models/sensor_data.dart';
+import '../l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -12,7 +13,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context)!.settings),
       ),
       body: Consumer2<BleProvider, SensorDataProvider>(
         builder: (context, bleProvider, sensorProvider, child) {
@@ -21,7 +22,7 @@ class SettingsScreen extends StatelessWidget {
             children: [
               // Device Settings Section
               Text(
-                'Device',
+                AppLocalizations.of(context)!.device,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 12),
@@ -38,28 +39,28 @@ class SettingsScreen extends StatelessWidget {
                           ? Colors.green 
                           : Colors.grey,
                       ),
-                      title: const Text('Device Connection'),
+                      title: Text(AppLocalizations.of(context)!.deviceConnection),
                       subtitle: Text(
-                        bleProvider.isConnected 
-                          ? 'Connected to ${bleProvider.connectedDevice?.platformName ?? 'Unknown'}'
-                          : 'Not connected',
+                        bleProvider.isConnected
+                          ? AppLocalizations.of(context)!.connectedTo(bleProvider.connectedDevice?.platformName ?? 'Unknown')
+                          : AppLocalizations.of(context)!.notConnected,
                       ),
                       trailing: bleProvider.isConnected
                           ? TextButton(
                               onPressed: bleProvider.disconnect,
-                              child: const Text('Disconnect'),
+                              child: Text(AppLocalizations.of(context)!.disconnect),
                             )
                           : TextButton(
                               onPressed: bleProvider.scanForDevices,
-                              child: const Text('Connect'),
+                              child: Text(AppLocalizations.of(context)!.connect),
                             ),
                     ),
                     if (bleProvider.isConnected) ...[
                       const Divider(),
                       ListTile(
                         leading: Icon(MdiIcons.clockOutline),
-                        title: const Text('Sync Device Time'),
-                        subtitle: const Text('Update device RTC with current time'),
+                        title: Text(AppLocalizations.of(context)!.syncDeviceTime),
+                        subtitle: Text(AppLocalizations.of(context)!.updateDeviceRTC),
                         trailing: IconButton(
                           onPressed: () => _syncTime(context, bleProvider),
                           icon: Icon(MdiIcons.refresh),
@@ -74,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
 
               // Data Management Section
               Text(
-                'Data Management',
+                AppLocalizations.of(context)!.dataManagement,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 12),
@@ -84,9 +85,9 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: Icon(MdiIcons.database, color: Colors.blue),
-                      title: const Text('Clear Local Data'),
+                      title: Text(AppLocalizations.of(context)!.clearLocalData),
                       subtitle: Text(
-                        'Remove all stored sensor readings (${sensorProvider.historicalData.length} entries)',
+                        AppLocalizations.of(context)!.removeStoredReadings(sensorProvider.historicalData.length),
                       ),
                       trailing: IconButton(
                         onPressed: sensorProvider.historicalData.isNotEmpty
@@ -98,8 +99,8 @@ class SettingsScreen extends StatelessWidget {
                     const Divider(),
                     ListTile(
                       leading: Icon(MdiIcons.download, color: Colors.green),
-                      title: const Text('Download Device Logs'),
-                      subtitle: const Text('Fetch historical data from device'),
+                      title: Text(AppLocalizations.of(context)!.downloadDeviceLogs),
+                      subtitle: Text(AppLocalizations.of(context)!.fetchHistoricalData),
                       trailing: IconButton(
                         onPressed: bleProvider.isConnected
                             ? () => _downloadLogs(context, bleProvider)
@@ -115,7 +116,7 @@ class SettingsScreen extends StatelessWidget {
 
               // App Information Section
               Text(
-                'About',
+                AppLocalizations.of(context)!.about,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 12),
@@ -125,20 +126,20 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: Icon(MdiIcons.leaf, color: Colors.green),
-                      title: const Text('Smart Plant Monitor'),
-                      subtitle: const Text('Version 1.0.0'),
+                      title: Text(AppLocalizations.of(context)!.appTitle),
+                      subtitle: Text(AppLocalizations.of(context)!.version),
                     ),
                     const Divider(),
                     ListTile(
                       leading: Icon(MdiIcons.information),
-                      title: const Text('Device Info'),
-                      subtitle: const Text('ESP32 Smart Plant Monitoring System'),
+                      title: Text(AppLocalizations.of(context)!.deviceInfo),
+                      subtitle: Text(AppLocalizations.of(context)!.esp32System),
                     ),
                     const Divider(),
                     ListTile(
                       leading: Icon(MdiIcons.heart, color: Colors.red),
-                      title: const Text('Made with Flutter'),
-                      subtitle: const Text('Built for plant care enthusiasts'),
+                      title: Text(AppLocalizations.of(context)!.madeWithFlutter),
+                      subtitle: Text(AppLocalizations.of(context)!.builtForPlantCare),
                     ),
                   ],
                 ),
@@ -149,7 +150,7 @@ class SettingsScreen extends StatelessWidget {
               // Device Status Section
               if (sensorProvider.hasData) ...[
                 Text(
-                  'Current Status',
+                  AppLocalizations.of(context)!.currentStatus,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 12),
@@ -162,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
                         _buildStatusRow(
                           context,
                           icon: MdiIcons.waterPercent,
-                          label: 'Soil Moisture',
+                          label: AppLocalizations.of(context)!.soilMoisture,
                           value: sensorProvider.latestSensorData!.soilMoisturePercentage,
                           color: _getSoilMoistureColor(sensorProvider.soilMoistureLevel!),
                         ),
@@ -170,7 +171,7 @@ class SettingsScreen extends StatelessWidget {
                         _buildStatusRow(
                           context,
                           icon: MdiIcons.thermometer,
-                          label: 'Temperature',
+                          label: AppLocalizations.of(context)!.temperature,
                           value: sensorProvider.latestSensorData!.temperatureCelsius,
                           color: Colors.orange,
                         ),
@@ -178,7 +179,7 @@ class SettingsScreen extends StatelessWidget {
                         _buildStatusRow(
                           context,
                           icon: MdiIcons.waterOutline,
-                          label: 'Humidity',
+                          label: AppLocalizations.of(context)!.humidity,
                           value: sensorProvider.latestSensorData!.humidityPercentage,
                           color: Colors.blue,
                         ),
@@ -270,8 +271,8 @@ class SettingsScreen extends StatelessWidget {
       await bleProvider.syncRTC();
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Device time synchronized successfully'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.deviceTimeSynced),
             backgroundColor: Colors.green,
           ),
         );
@@ -280,7 +281,7 @@ class SettingsScreen extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to sync time: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToSyncTime(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -292,16 +293,12 @@ class SettingsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Clear Local Data'),
-        content: const Text(
-          'This will remove all stored sensor readings from your device. '
-          'This action cannot be undone.\n\n'
-          'Are you sure you want to continue?',
-        ),
+        title: Text(AppLocalizations.of(context)!.clearLocalData),
+        content: Text(AppLocalizations.of(context)!.clearLocalDataConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -309,15 +306,15 @@ class SettingsScreen extends StatelessWidget {
               await sensorProvider.clearAllData();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Local data cleared successfully'),
+                  SnackBar(
+                    content: Text(AppLocalizations.of(context)!.localDataCleared),
                     backgroundColor: Colors.green,
                   ),
                 );
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('Clear Data'),
+            child: Text(AppLocalizations.of(context)!.clearData),
           ),
         ],
       ),
@@ -329,8 +326,8 @@ class SettingsScreen extends StatelessWidget {
       await bleProvider.requestLogs(start: 0, count: 100);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Log download requested. Check the Logs tab.'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.logDownloadRequested),
             backgroundColor: Colors.green,
           ),
         );
@@ -339,7 +336,7 @@ class SettingsScreen extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to request logs: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToRequestLogs(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

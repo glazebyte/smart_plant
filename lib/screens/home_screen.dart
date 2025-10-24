@@ -8,6 +8,7 @@ import '../widgets/sensor_card.dart';
 import '../widgets/connection_status_card.dart';
 import '../widgets/quick_actions_card.dart';
 import '../widgets/status_indicator.dart';
+import '../l10n/app_localizations.dart';
 import 'connection_screen.dart';
 import 'control_screen.dart';
 import 'schedule_screen.dart';
@@ -85,23 +86,23 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.viewDashboard),
-            label: 'Dashboard',
+            label: AppLocalizations.of(context)!.dashboard,
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.waterPump),
-            label: 'Control',
+            label: AppLocalizations.of(context)!.control,
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.calendar),
-            label: 'Schedule',
+            label: AppLocalizations.of(context)!.schedule,
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.history),
-            label: 'Logs',
+            label: AppLocalizations.of(context)!.logs,
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.cog),
-            label: 'Settings',
+            label: AppLocalizations.of(context)!.settings,
           ),
         ],
       ),
@@ -116,7 +117,7 @@ class DashboardTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Plant Monitor'),
+        title: Text(AppLocalizations.of(context)!.appTitle),
         actions: [
           Consumer<BleProvider>(
             builder: (context, bleProvider, child) {
@@ -167,8 +168,10 @@ class DashboardTab extends StatelessWidget {
                         Expanded(
                           child: StatusIndicator(
                             icon: MdiIcons.waterPercent,
-                            label: 'Soil Moisture',
-                            value: sensorProvider.needsWatering ? 'Low' : 'Good',
+                            label: AppLocalizations.of(context)!.soilMoisture,
+                            value: sensorProvider.needsWatering
+                              ? AppLocalizations.of(context)!.low
+                              : AppLocalizations.of(context)!.good,
                             color: sensorProvider.needsWatering 
                               ? Colors.orange 
                               : Colors.green,
@@ -183,7 +186,7 @@ class DashboardTab extends StatelessWidget {
                   // Sensor Cards
                   if (sensorProvider.hasData) ...[
                     Text(
-                      'Current Readings',
+                      AppLocalizations.of(context)!.currentReadings,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 12),
@@ -193,7 +196,7 @@ class DashboardTab extends StatelessWidget {
                         Expanded(
                           child: SensorCard(
                             icon: MdiIcons.waterPercent,
-                            label: 'Soil Moisture',
+                            label: AppLocalizations.of(context)!.soilMoisture,
                             value: sensorProvider.latestSensorData!.soilMoisturePercentage,
                             color: _getSoilMoistureColor(sensorProvider.soilMoistureLevel!),
                           ),
@@ -202,7 +205,7 @@ class DashboardTab extends StatelessWidget {
                         Expanded(
                           child: SensorCard(
                             icon: MdiIcons.waterOutline,
-                            label: 'Humidity',
+                            label: AppLocalizations.of(context)!.humidity,
                             value: sensorProvider.latestSensorData!.humidityPercentage,
                             color: Colors.blue,
                           ),
@@ -213,7 +216,7 @@ class DashboardTab extends StatelessWidget {
                     
                     SensorCard(
                       icon: MdiIcons.thermometer,
-                      label: 'Temperature',
+                      label: AppLocalizations.of(context)!.temperature,
                       value: sensorProvider.latestSensorData!.temperatureCelsius,
                       color: Colors.orange,
                     ),
@@ -231,16 +234,16 @@ class DashboardTab extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'No sensor data available',
+                            AppLocalizations.of(context)!.noSensorData,
                             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                               color: Colors.grey,
                             ),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            bleProvider.isConnected 
-                              ? 'Waiting for data from your smart plant...'
-                              : 'Connect to your smart plant to view data',
+                            bleProvider.isConnected
+                              ? AppLocalizations.of(context)!.waitingForData
+                              : AppLocalizations.of(context)!.connectToViewData,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Colors.grey,
                             ),
@@ -271,11 +274,11 @@ class DashboardTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Last Update',
+                                  AppLocalizations.of(context)!.lastUpdate,
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 Text(
-                                  _formatDateTime(sensorProvider.latestSensorData!.dateTime),
+                                  _formatDateTime(context, sensorProvider.latestSensorData!.dateTime),
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ],
@@ -305,16 +308,16 @@ class DashboardTab extends StatelessWidget {
   }
 
 
-  String _formatDateTime(DateTime dateTime) {
+  String _formatDateTime(BuildContext context, DateTime dateTime) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
     
     if (difference.inMinutes < 1) {
-      return 'Just now';
+      return AppLocalizations.of(context)!.justNow;
     } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes}m ago';
+      return AppLocalizations.of(context)!.minutesAgo(difference.inMinutes);
     } else if (difference.inHours < 24) {
-      return '${difference.inHours}h ago';
+      return AppLocalizations.of(context)!.hoursAgo(difference.inHours);
     } else {
       return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
     }

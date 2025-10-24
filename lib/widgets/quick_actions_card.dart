@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../providers/ble_provider.dart';
 import '../providers/sensor_data_provider.dart';
+import '../l10n/app_localizations.dart';
 
 class QuickActionsCard extends StatelessWidget {
   const QuickActionsCard({super.key});
@@ -16,7 +17,7 @@ class QuickActionsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Quick Actions',
+              AppLocalizations.of(context)!.quickActions,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
@@ -29,8 +30,8 @@ class QuickActionsCard extends StatelessWidget {
                         Expanded(
                           child: _QuickActionButton(
                             icon: MdiIcons.waterPump,
-                            label: 'Water Now',
-                            subtitle: '30 seconds',
+                            label: AppLocalizations.of(context)!.waterNow,
+                            subtitle: AppLocalizations.of(context)!.seconds30,
                             color: Colors.blue,
                             onPressed: bleProvider.isConnected
                                 ? () => _showWateringDialog(context, bleProvider)
@@ -41,8 +42,8 @@ class QuickActionsCard extends StatelessWidget {
                         Expanded(
                           child: _QuickActionButton(
                             icon: MdiIcons.clockOutline,
-                            label: 'Sync Time',
-                            subtitle: 'Update RTC',
+                            label: AppLocalizations.of(context)!.syncTime,
+                            subtitle: AppLocalizations.of(context)!.updateRTC,
                             color: Colors.orange,
                             onPressed: bleProvider.isConnected
                                 ? () => _syncTime(context, bleProvider)
@@ -57,8 +58,8 @@ class QuickActionsCard extends StatelessWidget {
                         Expanded(
                           child: _QuickActionButton(
                             icon: MdiIcons.refresh,
-                            label: 'Refresh Data',
-                            subtitle: 'Get latest',
+                            label: AppLocalizations.of(context)!.refreshData,
+                            subtitle: AppLocalizations.of(context)!.getLatest,
                             color: Colors.green,
                             onPressed: bleProvider.isConnected
                                 ? () => _refreshData(context, bleProvider)
@@ -69,8 +70,8 @@ class QuickActionsCard extends StatelessWidget {
                         Expanded(
                           child: _QuickActionButton(
                             icon: MdiIcons.history,
-                            label: 'View Logs',
-                            subtitle: 'Data history',
+                            label: AppLocalizations.of(context)!.viewLogs,
+                            subtitle: AppLocalizations.of(context)!.dataHistory,
                             color: Colors.purple,
                             onPressed: bleProvider.isConnected
                                 ? () => _viewLogs(context, bleProvider)
@@ -97,7 +98,7 @@ class QuickActionsCard extends StatelessWidget {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                'Connect to your smart plant to use quick actions',
+                                AppLocalizations.of(context)!.connectToUseQuickActions,
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: Colors.orange[800],
                                 ),
@@ -124,11 +125,11 @@ class QuickActionsCard extends StatelessWidget {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => AlertDialog(
-          title: const Text('Water Plant'),
+          title: Text(AppLocalizations.of(context)!.waterPlant),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Select watering duration:'),
+              Text(AppLocalizations.of(context)!.selectWateringDuration),
               const SizedBox(height: 16),
               Slider(
                 value: duration.toDouble(),
@@ -142,21 +143,21 @@ class QuickActionsCard extends StatelessWidget {
                   });
                 },
               ),
-              Text('Duration: ${duration} seconds'),
+              Text(AppLocalizations.of(context)!.durationSeconds(duration)),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
                 bleProvider.triggerWatering(durationSeconds: duration);
-                _showSnackBar(context, 'Watering started for ${duration} seconds');
+                _showSnackBar(context, AppLocalizations.of(context)!.wateringStartedFor('${duration}s'));
               },
-              child: const Text('Start Watering'),
+              child: Text(AppLocalizations.of(context)!.startWatering),
             ),
           ],
         ),
@@ -167,23 +168,23 @@ class QuickActionsCard extends StatelessWidget {
   void _syncTime(BuildContext context, BleProvider bleProvider) async {
     try {
       await bleProvider.syncRTC();
-      _showSnackBar(context, 'Time synchronized successfully');
+      _showSnackBar(context, AppLocalizations.of(context)!.timeSynchronizedSuccessfully);
     } catch (e) {
-      _showSnackBar(context, 'Failed to sync time: $e', isError: true);
+      _showSnackBar(context, AppLocalizations.of(context)!.failedToSyncTime(e.toString()), isError: true);
     }
   }
 
   void _refreshData(BuildContext context, BleProvider bleProvider) {
     // The sensor data is automatically refreshed via BLE notifications
-    _showSnackBar(context, 'Data refresh requested');
+    _showSnackBar(context, AppLocalizations.of(context)!.dataRefreshRequested);
   }
 
   void _viewLogs(BuildContext context, BleProvider bleProvider) async {
     try {
       await bleProvider.requestLogs(start: 0, count: 100);
-      _showSnackBar(context, 'Log data requested');
+      _showSnackBar(context, AppLocalizations.of(context)!.logDataRequestedShort);
     } catch (e) {
-      _showSnackBar(context, 'Failed to request logs: $e', isError: true);
+      _showSnackBar(context, AppLocalizations.of(context)!.failedToRequestLogs(e.toString()), isError: true);
     }
   }
 

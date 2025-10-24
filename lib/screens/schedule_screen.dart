@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../providers/ble_provider.dart';
 import '../models/schedule.dart';
+import '../l10n/app_localizations.dart';
 import 'dart:developer';
 
 class ScheduleScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to load schedules: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToLoadSchedules(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -67,7 +68,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Watering Schedule'),
+        title: Text(AppLocalizations.of(context)!.wateringSchedule),
         actions: [
           IconButton(onPressed: _loadSchedules, icon: Icon(MdiIcons.refresh)),
         ],
@@ -96,7 +97,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Device Not Connected',
+                              AppLocalizations.of(context)!.deviceNotConnected,
                               style: Theme.of(context).textTheme.titleMedium
                                   ?.copyWith(
                                     color: Colors.orange[800],
@@ -105,7 +106,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Connect to your device to manage watering schedules',
+                              AppLocalizations.of(context)!.connectToManageSchedules,
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: Colors.orange[700]),
                             ),
@@ -147,16 +148,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           Icon(MdiIcons.calendarClock, size: 64, color: Colors.grey),
           const SizedBox(height: 16),
           Text(
-            'No Schedules Yet',
+            AppLocalizations.of(context)!.noSchedulesYet,
             style: Theme.of(
               context,
             ).textTheme.headlineSmall?.copyWith(color: Colors.grey),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Add your first watering schedule to\nkeep your plant healthy automatically',
+          Text(
+            AppLocalizations.of(context)!.addFirstSchedule,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           ),
           const SizedBox(height: 24),
           Consumer<BleProvider>(
@@ -164,7 +165,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               return ElevatedButton.icon(
                 onPressed: bleProvider.isConnected ? _addNewSchedule : null,
                 icon: Icon(MdiIcons.plus),
-                label: const Text('Add Schedule'),
+                label: Text(AppLocalizations.of(context)!.addSchedule),
               );
             },
           ),
@@ -192,7 +193,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               ),
             ),
             title: Text(
-              'Schedule ${schedule.slot}',
+              AppLocalizations.of(context)!.scheduleSlot(schedule.slot),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: schedule.isEnabled ? null : Colors.grey,
@@ -225,7 +226,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'Next: ${_formatNextSchedule(schedule.nextScheduledTime!)}',
+                        AppLocalizations.of(context)!.nextScheduled(_formatNextSchedule(schedule.nextScheduledTime!)),
                         style: TextStyle(color: Colors.grey[600], fontSize: 12),
                       ),
                     ],
@@ -258,7 +259,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         children: [
                           Icon(MdiIcons.pencil, size: 18),
                           const SizedBox(width: 8),
-                          const Text('Edit'),
+                          Text(AppLocalizations.of(context)!.edit),
                         ],
                       ),
                     ),
@@ -268,7 +269,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         children: [
                           Icon(MdiIcons.delete, size: 18, color: Colors.red),
                           const SizedBox(width: 8),
-                          Text('Delete', style: TextStyle(color: Colors.red)),
+                          Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
                         ],
                       ),
                     ),
@@ -326,8 +327,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Schedule saved successfully'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.scheduleSavedSuccessfully),
             backgroundColor: Colors.green,
           ),
         );
@@ -336,7 +337,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to save schedule: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToSaveSchedule(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -353,14 +354,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Schedule'),
+        title: Text(AppLocalizations.of(context)!.deleteSchedule),
         content: Text(
-          'Are you sure you want to delete Schedule ${schedule.slot}?',
+          AppLocalizations.of(context)!.deleteScheduleConfirm(schedule.slot),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -373,7 +374,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               await _saveSchedule(deletedSchedule);
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('Delete'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -428,7 +429,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.schedule != null ? 'Edit Schedule' : 'New Schedule'),
+      title: Text(widget.schedule != null ? AppLocalizations.of(context)!.editSchedule : AppLocalizations.of(context)!.newSchedule),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -436,7 +437,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
           TextField(
             controller: _timeController,
             decoration: InputDecoration(
-              labelText: 'Watering Time',
+              labelText: AppLocalizations.of(context)!.wateringTime,
               hintText: 'HH:MM',
               prefixIcon: Icon(MdiIcons.clockOutline),
             ),
@@ -447,7 +448,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
 
           // Duration slider
           Text(
-            'Duration: ${_formatDuration(_duration)}',
+            '${AppLocalizations.of(context)!.duration}: ${_formatDuration(_duration)}',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           Slider(
@@ -466,7 +467,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
 
           // Enabled switch
           SwitchListTile(
-            title: const Text('Enable Schedule'),
+            title: Text(AppLocalizations.of(context)!.enableSchedule),
             value: _enabled,
             onChanged: (value) {
               setState(() {
@@ -479,9 +480,9 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(AppLocalizations.of(context)!.cancel),
         ),
-        ElevatedButton(onPressed: _saveSchedule, child: const Text('Save')),
+        ElevatedButton(onPressed: _saveSchedule, child: Text(AppLocalizations.of(context)!.save)),
       ],
     );
   }

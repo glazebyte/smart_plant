@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../providers/ble_provider.dart';
 import '../services/ble_service.dart';
+import '../l10n/app_localizations.dart';
 
 class ConnectionScreen extends StatefulWidget {
   const ConnectionScreen({super.key});
@@ -29,7 +30,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Device Connection'),
+        title: Text(AppLocalizations.of(context)!.deviceConnection),
         actions: [
           Consumer<BleProvider>(
             builder: (context, bleProvider, child) {
@@ -61,7 +62,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      _getStatusText(bleProvider.connectionState),
+                      _getStatusText(bleProvider.connectionState, context),
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: _getStatusColor(bleProvider.connectionState),
                         fontWeight: FontWeight.w600,
@@ -98,7 +99,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Connection Error',
+                              AppLocalizations.of(context)!.connectionError,
                               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 color: Colors.red,
                                 fontWeight: FontWeight.w600,
@@ -139,7 +140,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     child: ElevatedButton.icon(
                       onPressed: bleProvider.disconnect,
                       icon: Icon(MdiIcons.bluetoothOff),
-                      label: const Text('Disconnect'),
+                      label: Text(AppLocalizations.of(context)!.disconnect),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white,
@@ -155,7 +156,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     child: ElevatedButton.icon(
                       onPressed: bleProvider.scanForDevices,
                       icon: Icon(MdiIcons.magnify),
-                      label: const Text('Scan for Devices'),
+                      label: Text(AppLocalizations.of(context)!.scanForDevices),
                     ),
                   ),
                 ),
@@ -168,13 +169,13 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
 
   Widget _buildEmptyState(BleProvider bleProvider) {
     if (bleProvider.isScanning) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Scanning for smart plant devices...'),
+            const CircularProgressIndicator(),
+            const SizedBox(height: 16),
+            Text(AppLocalizations.of(context)!.scanningForDevices),
           ],
         ),
       );
@@ -191,22 +192,22 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'No devices found',
+            AppLocalizations.of(context)!.noDevicesFound,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: Colors.grey,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Make sure your smart plant device is powered on\nand in pairing mode',
+          Text(
+            AppLocalizations.of(context)!.devicePairingInstructions,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: bleProvider.scanForDevices,
             icon: Icon(MdiIcons.refresh),
-            label: const Text('Scan Again'),
+            label: Text(AppLocalizations.of(context)!.scanAgain),
           ),
         ],
       ),
@@ -257,9 +258,9 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
-                      'CONNECTED',
-                      style: TextStyle(
+                    child: Text(
+                      AppLocalizations.of(context)!.connected.toUpperCase(),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -292,7 +293,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
       if (mounted && bleProvider.isConnected) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Connected to ${device.platformName}'),
+            content: Text(AppLocalizations.of(context)!.connectedTo(device.platformName)),
             backgroundColor: Colors.green,
           ),
         );
@@ -301,7 +302,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to connect: $e'),
+            content: Text(AppLocalizations.of(context)!.failedToConnect(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -335,16 +336,16 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
     }
   }
 
-  String _getStatusText(BleConnectionState state) {
+  String _getStatusText(BleConnectionState state, BuildContext context) {
     switch (state) {
       case BleConnectionState.disconnected:
-        return 'Disconnected';
+        return AppLocalizations.of(context)!.disconnected;
       case BleConnectionState.scanning:
-        return 'Scanning...';
+        return AppLocalizations.of(context)!.scanning;
       case BleConnectionState.connecting:
-        return 'Connecting...';
+        return AppLocalizations.of(context)!.connecting;
       case BleConnectionState.connected:
-        return 'Connected';
+        return AppLocalizations.of(context)!.connected;
     }
   }
 }
