@@ -1,11 +1,11 @@
 class ChatConfig {
   // Replace this with your actual OpenRouter API key
   // You can get one from: https://openrouter.ai/keys
-  static const String openRouterApiKey = "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";
+  static const String openRouterApiKey = "add_your_openrouter_api_key_here";
   
   // OpenRouter configuration
   static const String baseUrl = "https://openrouter.ai/api/v1";
-  static const String defaultModel = "tngtech/deepseek-r1t2-chimera:free"; // Cost-effective model
+  static const String defaultModel = "model"; // Cost-effective model
   // Alternative models you can use:
   // "openai/gpt-3.5-turbo" - OpenAI's GPT-3.5
   // "anthropic/claude-3-sonnet" - Claude 3 Sonnet
