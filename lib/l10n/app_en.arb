@@ -798,5 +798,50 @@
   "logDataRequestedShort": "Log data requested",
   "@logDataRequestedShort": {
     "description": "Short log data request message"
+  },
+
+  "plantAssistant": "Plant Assistant",
+  "@plantAssistant": {
+    "description": "Plant assistant chat screen title"
+  },
+
+  "clearChat": "Clear Chat",
+  "@clearChat": {
+    "description": "Clear chat button and dialog title"
+  },
+
+  "clearChatConfirm": "Are you sure you want to clear all chat messages? This action cannot be undone.",
+  "@clearChatConfirm": {
+    "description": "Clear chat confirmation message"
+  },
+
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear button text"
+  },
+
+  "startConversation": "Start a conversation with your Plant Assistant",
+  "@startConversation": {
+    "description": "Message when no chat messages exist"
+  },
+
+  "chatError": "Failed to send message. Please check your API key and try again.",
+  "@chatError": {
+    "description": "Chat error message"
+  },
+
+  "typeMessage": "Ask about your plant...",
+  "@typeMessage": {
+    "description": "Chat input placeholder text"
+  },
+
+  "typing": "Typing...",
+  "@typing": {
+    "description": "Typing indicator text"
+  },
+
+  "chat": "Chat",
+  "@chat": {
+    "description": "Chat tab label"
   }
 }

@@ -14,6 +14,7 @@ import 'control_screen.dart';
 import 'schedule_screen.dart';
 import 'logs_screen.dart';
 import 'settings_screen.dart';
+import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -74,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ControlScreen(),
           ScheduleScreen(),
           LogsScreen(),
+          ChatScreen(),
           SettingsScreen(),
         ],
       ),
@@ -99,6 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.history),
             label: AppLocalizations.of(context)!.logs,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.chat),
+            label: AppLocalizations.of(context)!.chat,
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.cog),

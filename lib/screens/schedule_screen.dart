@@ -225,23 +225,28 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         color: Colors.grey[600],
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        AppLocalizations.of(context)!.nextScheduled(_formatNextSchedule(schedule.nextScheduledTime!)),
-                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.nextScheduled(_formatNextSchedule(schedule.nextScheduledTime!)),
+                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
                 ],
               ],
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
+            trailing: Wrap(
+              alignment: WrapAlignment.end,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Switch(
                   value: schedule.isEnabled,
                   onChanged: (value) => _toggleSchedule(schedule, value),
                 ),
                 PopupMenuButton<String>(
+                  padding: EdgeInsets.zero,
                   onSelected: (value) {
                     switch (value) {
                       case 'edit':

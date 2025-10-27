@@ -798,5 +798,50 @@
   "logDataRequestedShort": "Data log diminta",
   "@logDataRequestedShort": {
     "description": "Pesan permintaan data log singkat"
+  },
+
+  "plantAssistant": "Asisten Tanaman",
+  "@plantAssistant": {
+    "description": "Judul layar chat asisten tanaman"
+  },
+
+  "clearChat": "Hapus Chat",
+  "@clearChat": {
+    "description": "Tombol dan judul dialog hapus chat"
+  },
+
+  "clearChatConfirm": "Apakah Anda yakin ingin menghapus semua pesan chat? Tindakan ini tidak dapat dibatalkan.",
+  "@clearChatConfirm": {
+    "description": "Pesan konfirmasi hapus chat"
+  },
+
+  "clear": "Hapus",
+  "@clear": {
+    "description": "Teks tombol hapus"
+  },
+
+  "startConversation": "Mulai percakapan dengan Asisten Tanaman Anda",
+  "@startConversation": {
+    "description": "Pesan ketika belum ada pesan chat"
+  },
+
+  "chatError": "Gagal mengirim pesan. Silakan periksa API key Anda dan coba lagi.",
+  "@chatError": {
+    "description": "Pesan kesalahan chat"
+  },
+
+  "typeMessage": "Tanya tentang tanaman Anda...",
+  "@typeMessage": {
+    "description": "Teks placeholder input chat"
+  },
+
+  "typing": "Mengetik...",
+  "@typing": {
+    "description": "Teks indikator mengetik"
+  },
+
+  "chat": "Chat",
+  "@chat": {
+    "description": "Label tab chat"
   }
 }

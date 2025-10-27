@@ -479,4 +479,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logDataRequestedShort => 'Log data requested';
+
+  @override
+  String get plantAssistant => 'Plant Assistant';
+
+  @override
+  String get clearChat => 'Clear Chat';
+
+  @override
+  String get clearChatConfirm =>
+      'Are you sure you want to clear all chat messages? This action cannot be undone.';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get startConversation =>
+      'Start a conversation with your Plant Assistant';
+
+  @override
+  String get chatError =>
+      'Failed to send message. Please check your API key and try again.';
+
+  @override
+  String get typeMessage => 'Ask about your plant...';
+
+  @override
+  String get typing => 'Typing...';
+
+  @override
+  String get chat => 'Chat';
 }

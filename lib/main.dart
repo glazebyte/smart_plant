@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'providers/ble_provider.dart';
 import 'providers/sensor_data_provider.dart';
+import 'providers/chat_provider.dart';
 import 'theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
 
@@ -20,6 +21,7 @@ class SmartPlantApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => BleProvider()),
         ChangeNotifierProvider(create: (_) => SensorDataProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: MaterialApp(
         title: 'Smart Plant Monitor',

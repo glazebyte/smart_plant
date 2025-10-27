@@ -949,6 +949,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log data requested'**
   String get logDataRequestedShort;
+
+  /// Plant assistant chat screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Plant Assistant'**
+  String get plantAssistant;
+
+  /// Clear chat button and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Chat'**
+  String get clearChat;
+
+  /// Clear chat confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all chat messages? This action cannot be undone.'**
+  String get clearChatConfirm;
+
+  /// Clear button text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// Message when no chat messages exist
+  ///
+  /// In en, this message translates to:
+  /// **'Start a conversation with your Plant Assistant'**
+  String get startConversation;
+
+  /// Chat error message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send message. Please check your API key and try again.'**
+  String get chatError;
+
+  /// Chat input placeholder text
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your plant...'**
+  String get typeMessage;
+
+  /// Typing indicator text
+  ///
+  /// In en, this message translates to:
+  /// **'Typing...'**
+  String get typing;
+
+  /// Chat tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat;
 }
 
 class _AppLocalizationsDelegate

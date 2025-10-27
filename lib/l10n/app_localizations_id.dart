@@ -481,4 +481,34 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get logDataRequestedShort => 'Data log diminta';
+
+  @override
+  String get plantAssistant => 'Asisten Tanaman';
+
+  @override
+  String get clearChat => 'Hapus Chat';
+
+  @override
+  String get clearChatConfirm =>
+      'Apakah Anda yakin ingin menghapus semua pesan chat? Tindakan ini tidak dapat dibatalkan.';
+
+  @override
+  String get clear => 'Hapus';
+
+  @override
+  String get startConversation =>
+      'Mulai percakapan dengan Asisten Tanaman Anda';
+
+  @override
+  String get chatError =>
+      'Gagal mengirim pesan. Silakan periksa API key Anda dan coba lagi.';
+
+  @override
+  String get typeMessage => 'Tanya tentang tanaman Anda...';
+
+  @override
+  String get typing => 'Mengetik...';
+
+  @override
+  String get chat => 'Chat';
 }
